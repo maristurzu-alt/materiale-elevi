@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossă — Eminescu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap">
+<style>
+/* Layout: antet navy, apoi strofele RO | HU în două coloane (o coloană pe telefon), navigare pe strofe */
+:root{
+  --navy:#1a2744; --cream:#f5f0e8; --green:#7cb342; --green-ink:#3f6b12;
+  --bg:#f5f0e8; --fg:#1a2744; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
+  --hu:#46516b;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121b30; --fg:#f5f0e8; --muted:#a7afc2; --card:#1a2744; --line:#2c3a5c; --hu:#c9cfdc; --green-ink:#a5d66b; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121b30; --fg:#f5f0e8; --muted:#a7afc2; --card:#1a2744; --line:#2c3a5c; --hu:#c9cfdc; --green-ink:#a5d66b; color-scheme:dark}
+html,body{margin:0}
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
+header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
+.wrap{max-width:960px; margin:0 auto; padding-inline:16px}
+.eyebrow{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--green)}
+h1{font-family:var(--serif); font-size:clamp(2.2rem,7vw,3.4rem); margin:.2rem 0 .3rem; line-height:1.1; text-wrap:balance}
+h1 em{font-weight:400; color:#c8ddb0}
+.sub{color:#d9d3c6; margin:0}
+.controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+.controls .wrap{display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; padding-block:.7rem}
+.nav{display:flex; flex-wrap:wrap; gap:.35rem}
+.nav a{min-width:2.2rem; text-align:center; padding:.25rem .4rem; border:1px solid var(--line); border-radius:6px; color:var(--fg); text-decoration:none; font-variant-numeric:tabular-nums; font-size:.92rem}
+.nav a:hover,.nav a:focus-visible{border-color:var(--green); outline:none; background:var(--card)}
+.toggle{margin-left:auto; display:flex; gap:.5rem; align-items:center; font-size:.95rem}
+.toggle button{font:inherit; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--green); background:var(--green); color:#14210a; cursor:pointer; font-weight:600}
+.toggle button[aria-pressed="false"]{background:transparent; color:var(--green-ink)}
+.toggle button:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+main{padding-block:1.5rem 3rem}
+.note{color:var(--muted); font-size:.95rem; max-width:65ch; margin:0 0 1.5rem}
+.strofa{display:grid; grid-template-columns:3rem 1fr 1fr; gap:0 1.5rem; padding-block:1.4rem; border-top:1px solid var(--line); scroll-margin-top:5rem}
+.nr{font-family:var(--serif); font-size:1.6rem; color:var(--green-ink); line-height:1.2; font-variant-numeric:tabular-nums}
+.col{min-width:0}
+.lang{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.35rem}
+.ro p{font-family:var(--serif); font-size:1.12rem; margin:0; line-height:1.65}
+.hu p{margin:0; color:var(--hu); font-style:italic; line-height:1.7}
+body.fara-hu .hu{display:none}
+body.fara-hu .strofa{grid-template-columns:3rem 1fr}
+footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); padding-block:1.2rem 2rem}
+@media (max-width:640px){
+  .strofa{grid-template-columns:1fr; gap:.6rem}
+  body.fara-hu .strofa{grid-template-columns:1fr}
+  .hu{padding-left:.9rem; border-left:3px solid var(--green)}
+  .toggle{margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="eyebrow">Lectură bilingvă</div>
+  <h1>Glossă <em>/ Glossza</em></h1>
+  <p class="sub">Mihai Eminescu · traducere în limba maghiară de Dsida Jenő</p>
+</div></header>
+
+<div class="controls"><div class="wrap">
+  <nav class="nav" id="nav" aria-label="Strofe"></nav>
+  <div class="toggle"><span>Traducerea:</span><button id="btnHu" type="button" aria-pressed="true">vizibilă</button></div>
+</div></div>
+
+<main><div class="wrap">
+  <p class="note">Citește mai întâi strofa în limba română. Folosește traducerea doar când nu înțelegi un vers. Poți ascunde traducerea cu butonul de sus.</p>
+  <div id="poem"></div>
+</div></main>
+
+<footer><div class="wrap">Text românesc: Romanian Voice · Traducere maghiară: Wikiforrás</div></footer>
+
+<script>
+const S=[
+["Vreme trece, vreme vine,|Toate-s vechi și nouă toate;|Ce e rău și ce e bine|Tu te-ntreabă și socoate;|Nu spera și nu ai teamă,|Ce e val ca valul trece;|De te-ndeamnă, de te cheamă,|Tu rămâi la toate rece.",
+"Évre év jön, évre év megy,|minden új és minden ódon.|Mi rossz és jó, meg ne tévedj,|vésd eszedbe minden módon.|Bízni balga, félni dőre:|nincs hullám, mely el nem illan.|Bármi csábit, hajt előre,|légy közömbös holtodiglan."],
+["Multe trec pe dinainte,|În auz ne sună multe,|Cine ține toate minte|Și ar sta să le asculte?...|Tu așează-te deoparte,|Regăsindu-te pe tine,|Când cu zgomote deșarte|Vreme trece, vreme vine.",
+"Áll a vásár este-reggel,|és fülünkbe egyre zúgnak.|Ki törődik ily sereggel|s ád hitelt e sok hazugnak?|Elhuzódva mindörökre|csöndesen magadba révedj,|amíg meddőn mennydörögve|évre év jön, évre év megy."],
+["Nici încline a ei limbă|Recea cumpăn-a gândirii|Înspre clipa ce se schimbă|Pentru masca fericirii,|Ce din moartea ei se naște|Și o clipă ține poate;|Pentru cine o cunoaște|Toate-s vechi și nouă toate.",
+"Félre soha ne billentse|agyad mérlegét a gyatra|pillanat, mely üdv s szerencse|képét hordja pillanatra,|s holt örömből nyerve lételt,|úgy születik már halódon.|Hogyha érted ezt a tételt,|minden új és minden ódon."],
+["Privitor ca la teatru|Tu în lume să te-nchipui:|Joace unul și pe patru,|Totuși tu ghici-vei chipu-i,|Și de plânge, de se ceartă,|Tu în colț petreci în tine|Și-nțelegi din a lor artă|Ce e rău și ce e bine.",
+"Oly színháznak véld a földet,|hol a játék sohse fogy ki:|egy szinész öt maszkot ölthet;|mégis tudod róla, hogy ki.|Őt páholják vagy ő páhol'?|a tanulság és az élv egy.|Néző légy, kit rejt a páholy,|mi rossz és jó, meg ne tévedj."],
+["Viitorul și trecutul|Sunt a filei două fețe,|Vede-n capăt începutul|Cine știe să le-nvețe;|Tot ce-a fost ori o să fie|În prezent le-avem pe toate,|Dar de-a lor zădărnicie|Te întreabă și socoate.",
+"Múlt s jövő, ha mérni kezded,|egy levél két fele-lapja,|végén látja, hol a kezdet,|ki böngészni kézbe kapja.|Mind, mi csak volt vagy leendő,|örök jelen földgolyódon,|ámhogy hiú s elvetendő,|vésd eszedbe minden módon."],
+["Căci acelorași mijloace|Se supun câte există,|Și de mii de ani încoace|Lumea-i veselă și tristă;|Alte măști, aceeași piesă,|Alte guri, aceeași gamă,|Amăgit atât de-adese|Nu spera și nu ai teamă.",
+"Egy törvény alá van téve|minden itt e tág piacra,|s tudja ég, hány ezredéve|sír, nevet az ember arca.|Új szereplők, régi dráma.|Új palackok, régi lőre -|csalódottak bölcs siráma:|bízni balga, félni dőre."],
+["Nu spera când vezi mișeii|La izbândă făcând punte,|Te-or întrece nătărăii,|De ai fi cu stea în frunte;|Teamă n-ai, căta-vor iarăși|Între dânșii să se plece,|Nu te prinde lor tovarăș:|Ce e val, ca valul trece.",
+"Bízni balga, bízni légvár,|eltiportak hogyha győznek,|homlokodon csillag ég bár,|a fajankók megelőznek.|Félni dőre: szolgadölyffel|egymást törik majd poriglan -|barátságuknak ne ülj fel:|nincs hullám, mely el nem illan."],
+["Cu un cântec de sirenă,|Lumea-ntinde lucii mreje;|Ca să schimbe-actorii-n scenă,|Te momește în vârteje;|Tu pe-alături te strecoară,|Nu băga nici chiar de seamă,|Din cărarea ta afară|De te-ndeamnă, de te cheamă.",
+"Csillog és csal, mint varázslép,|a világ, e szép boszorka,|s lám, helyetted színre más lép,|rád szorult a csapda torka.|Száz bűbáj közt bújj keresztül,|légy utadnak józan őre,|jobb, ha még pillád se rezdül,|bármi csábit, hajt előre."],
+["De te-ating, să feri în laturi,|De hulesc, să taci din gură;|Ce mai vrei cu-a tale sfaturi,|Dacă știi a lor măsură;|Zică toți ce vor să zică,|Treacă-n lume cine-o trece;|Ca să nu-ndrăgești nimică,|Tu rămâi la toate rece.",
+"Állj odébb, ha hozzád érnek,|hunyj szemet, ha jó barát csal,|látva mily mértékre mérnek,|mit akarsz még jó tanáccsal?|Ki-ki osztozzék a jusson,|lármázzék, ha nyelve csiklan.|Hogy a lelked révbe jusson,|légy közömbös holtodiglan."],
+["Tu rămâi la toate rece,|De te-ndeamnă, de te cheamă;|Ce e val, ca valul trece,|Nu spera și nu ai teamă;|Te întreabă și socoate|Ce e rău și ce e bine;|Toate-s vechi și nouă toate:|Vreme trece, vreme vine.",
+"Légy közömbös holtodiglan,|bármi csábit, hajt előre.|Nincs hullám, mely el nem illan:|bízni balga, félni dőre.|vésd eszedbe minden módon,|mi rossz és jó, meg ne tévedj.|Minden új és minden ódon.|Évre év jön, évre év megy."]
+];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const lines=t=>t.split('|').map(l=>esc(l)).join('<br>');
+const poem=document.getElementById('poem'), nav=document.getElementById('nav');
+S.forEach(([ro,hu],i)=>{
+  const n=i+1;
+  poem.insertAdjacentHTML('beforeend',
+   `<section class="strofa" id="s${n}"><div class="nr">${n}</div>
+     <div class="col ro"><div class="lang">Română</div><p>${lines(ro)}</p></div>
+     <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>${lines(hu)}</p></div></section>`);
+  nav.insertAdjacentHTML('beforeend',`<a href="#s${n}">${n}</a>`);
+});
+const b=document.getElementById('btnHu');
+function setHu(on){document.body.classList.toggle('fara-hu',!on);b.setAttribute('aria-pressed',on);b.textContent=on?'vizibilă':'ascunsă';try{localStorage.setItem('glossa-hu',on?'1':'0')}catch(e){}}
+b.addEventListener('click',()=>setHu(b.getAttribute('aria-pressed')!=='true'));
+let saved=null;try{saved=localStorage.getItem('glossa-hu')}catch(e){}
+setHu(saved!=='0');
+</script>
+</body>
+</html>
