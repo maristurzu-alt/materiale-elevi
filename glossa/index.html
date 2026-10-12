@@ -8,22 +8,22 @@
 <style>
 /* Layout: antet navy, apoi strofele RO | HU în două coloane (o coloană pe telefon), navigare pe strofe */
 :root{
-  --navy:#1a2744; --cream:#f5f0e8; --green:#7cb342; --green-ink:#3f6b12;
-  --bg:#f5f0e8; --fg:#1a2744; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
+  --navy:#0A1E35; --cream:#f7f2e8; --green:#6EE065; --green-ink:#2E7D32;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
   --hu:#46516b;
   --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#121b30; --fg:#f5f0e8; --muted:#a7afc2; --card:#1a2744; --line:#2c3a5c; --hu:#c9cfdc; --green-ink:#a5d66b; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121b30; --fg:#f5f0e8; --muted:#a7afc2; --card:#1a2744; --line:#2c3a5c; --hu:#c9cfdc; --green-ink:#a5d66b; color-scheme:dark}
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; color-scheme:dark}
 html,body{margin:0}
 body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
 header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
 .wrap{max-width:960px; margin:0 auto; padding-inline:16px}
 .eyebrow{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--green)}
 h1{font-family:var(--serif); font-size:clamp(2.2rem,7vw,3.4rem); margin:.2rem 0 .3rem; line-height:1.1; text-wrap:balance}
-h1 em{font-weight:400; color:#c8ddb0}
+h1 em{font-weight:400; color:#bdf2b9}
 .sub{color:#d9d3c6; margin:0}
 .controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
 .controls .wrap{display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; padding-block:.7rem}
@@ -31,7 +31,7 @@ h1 em{font-weight:400; color:#c8ddb0}
 .nav a{min-width:2.2rem; text-align:center; padding:.25rem .4rem; border:1px solid var(--line); border-radius:6px; color:var(--fg); text-decoration:none; font-variant-numeric:tabular-nums; font-size:.92rem}
 .nav a:hover,.nav a:focus-visible{border-color:var(--green); outline:none; background:var(--card)}
 .toggle{margin-left:auto; display:flex; gap:.5rem; align-items:center; font-size:.95rem}
-.toggle button{font:inherit; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--green); background:var(--green); color:#14210a; cursor:pointer; font-weight:600}
+.toggle button{font:inherit; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--green); background:var(--green); color:#0A1E35; cursor:pointer; font-weight:600}
 .toggle button[aria-pressed="false"]{background:transparent; color:var(--green-ink)}
 .toggle button:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
 main{padding-block:1.5rem 3rem}
