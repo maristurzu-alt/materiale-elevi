@@ -67,6 +67,53 @@ body.fara-marcaj .w{border-bottom-color:transparent}
 main{padding-bottom:12rem}
 .toggle{flex-wrap:wrap}
 .pair{display:inline-flex; gap:.4rem; align-items:center; white-space:nowrap}
+
+.act{margin-top:2.5rem}
+.sect{font-family:var(--serif); font-size:1.6rem; margin:0 0 1rem; border-top:3px solid var(--green); padding-top:1rem}
+.sect span{font-family:var(--sans); font-size:1rem; font-weight:400; color:var(--muted)}
+.comp{font-family:var(--serif); font-size:1.3rem; color:var(--green-ink); margin:1.8rem 0 .6rem}
+.card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; margin:0 0 1rem}
+.card h3{margin:0 0 .6rem; font-size:1.05rem}
+.card p{margin:.3rem 0}
+.item{padding:.5rem 0; border-top:1px solid var(--line)}
+.item.row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.4rem}
+.item.row p{font-family:var(--serif); font-size:1.1rem; margin:0}
+.opts{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.3rem}
+.item.row .opts{margin:0}
+.opts button,.check,.copy{font:inherit; font-size:.95rem; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer}
+.opts button[aria-pressed="true"]{border-color:var(--fg); box-shadow:inset 0 0 0 1px var(--fg); font-weight:600}
+.opts button.imp[aria-pressed="true"]{background:#fff2a8; color:#0A1E35}
+.opts button.con[aria-pressed="true"]{background:#cfe0ff; color:#0A1E35}
+.tag{padding:0 .3rem; border-radius:4px; color:#0A1E35}.tag.imp{background:#fff2a8}.tag.con{background:#cfe0ff}
+.check,.copy{margin-top:.7rem; background:var(--green); border-color:var(--green); color:#0A1E35; font-weight:600}
+.item.ok{box-shadow:inset 4px 0 0 var(--ok); padding-left:.6rem}
+.item.ko{box-shadow:inset 4px 0 0 var(--ko); padding-left:.6rem}
+.fix{color:var(--ko); font-size:.92rem; margin:.2rem 0 0}
+.score{font-weight:600}
+.line{font:inherit; width:100%; box-sizing:border-box; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.3rem}
+textarea{font:inherit; width:100%; box-sizing:border-box; padding:.5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.5rem}
+.count{color:var(--muted); font-size:.9rem}
+.count.bad{color:var(--ko)}
+.model{color:var(--muted); font-size:.95rem; font-style:italic}
+.req{margin:.2rem 0 .4rem; padding-left:1.2rem}
+.quote{font-family:var(--serif); font-size:1.1rem}
+.vers{font-family:var(--serif); font-size:1.08rem; line-height:1.7; border-left:3px solid var(--green); padding-left:.8rem; margin:.5rem 0 .8rem}
+.tbl{display:grid; gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden; margin:.6rem 0}
+.tbl>div{display:grid; grid-template-columns:1fr 1fr}
+.tbl span{padding:.45rem .6rem; border-top:1px solid var(--line)}
+.tbl span+span{border-left:1px solid var(--line); font-family:var(--serif)}
+.tbl .th span{border-top:0; font-weight:600; background:var(--bg)}
+.ck{display:flex; gap:.5rem; align-items:flex-start; padding:.25rem 0}
+.predare{color:var(--muted); font-size:.95rem}
+.next{display:block; text-align:center; margin:1.5rem 0 0; padding:.8rem 1rem; border-radius:8px; background:var(--navy); color:var(--cream); text-decoration:none; font-weight:600}
+.next:hover,.next:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+.sl{display:inline-block; min-width:1.6rem; text-align:center; margin:0 .1rem; padding:0 .3rem; border:1px solid var(--line); border-radius:5px; color:var(--green-ink); text-decoration:none; font-weight:600}
+.sl:hover,.sl:focus-visible{border-color:var(--green); background:var(--hl)}
+.ora{font-family:var(--sans); font-size:.9rem; font-weight:400; color:var(--muted)}
+.opts.col1{flex-direction:column; align-items:stretch}
+.opts.col1 button{text-align:left}
+.item.row select{font:inherit; padding:.25rem .4rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg)}
+.act{max-width:760px}
 </style>
 </head>
 <body>
@@ -116,6 +163,61 @@ main{padding-bottom:12rem}
  <div class="col ro"><div class="lang">Română</div><p>Tu rămâi la toate rece,<br>De te-ndeamnă, de te cheamă;<br>Ce e val, ca valul trece,<br>Nu spera și nu ai teamă;<br>Te întreabă și socoate<br>Ce e rău și ce e bine;<br>Toate-s vechi și nouă toate:<br>Vreme trece, vreme vine.</p></div>
  <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Légy közömbös holtodiglan,<br>bármi csábit, hajt előre.<br>Nincs hullám, mely el nem illan:<br>bízni balga, félni dőre.<br>vésd eszedbe minden módon,<br>mi rossz és jó, meg ne tévedj.<br>Minden új és minden ódon.<br>Évre év jön, évre év megy.</p></div></section>
 </div>
+
+<section class="act" id="proiect" aria-label="Proiectul în perechi">
+  <h2 class="sect">Proiectul în perechi <span>· 3 ore</span></h2>
+  <div class="card">
+    <p><b>Răspundeți în documentul comun din Classroom, la același număr (1a, 1b …).</b> A scrie cu albastru, B scrie cu verde.</p>
+    <p>Pe laptop: deschideți pagina în stânga și documentul în dreapta. Numerele din sarcini duc la strofe.</p>
+    <p>După ce ați scris în document, verificați-vă aici, la „Verificați”.</p>
+  </div>
+
+  <h2 class="comp">Etapa 1 · Receptare <span class="ora">ora 1</span></h2>
+  <div class="card">
+    <p><b>1a.</b> Citește poezia singur(ă), de la strofa 1 la strofa 10. Citește mai întâi textul românesc.</p>
+    <p><b>1b.</b> Strofa 1 <a class="sl" href="#s1">1</a>. Scrie cele 8 versuri în tabel.</p>
+    <p><b>1c.</b> Ultimul vers din strofele 2–9: <a class="sl" href="#s2">2</a> <a class="sl" href="#s3">3</a> <a class="sl" href="#s4">4</a> <a class="sl" href="#s5">5</a> <a class="sl" href="#s6">6</a> <a class="sl" href="#s7">7</a> <a class="sl" href="#s8">8</a> <a class="sl" href="#s9">9</a>. Scrie ultimul vers din fiecare strofă. Caută-l în strofa 1 și scrie numărul lui. Ce observi?</p>
+    <p><b>1d.</b> Strofa 10 <a class="sl" href="#s10">10</a>. Citește fiecare vers. Caută-l în strofa 1 și scrie numărul lui. Ce observi despre ordine?</p>
+    <p><b>1e.</b> Rima: cuvinte care sună la fel la sfârșitul versului (floare – soare). Uită-te la ultimul cuvânt din fiecare vers al strofei 1 <a class="sl" href="#s1">1</a>. Care versuri rimează?</p>
+    <p><b>1f.</b> Ascultare. A citește cu voce tare strofa 1. B ascultă, nu se uită în text, și notează 5 cuvinte auzite. Apoi B citește strofa 10, iar A notează 5 cuvinte. Verificați împreună în text.</p>
+  </div>
+  <div class="card task" data-kind="sel"><h3>Verificați 1c</h3><div class="item row" data-ans="1"><p>Strofa 2: ultimul vers = versul nr.</p><select aria-label="Strofa 2: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="2"><p>Strofa 3: ultimul vers = versul nr.</p><select aria-label="Strofa 3: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="3"><p>Strofa 4: ultimul vers = versul nr.</p><select aria-label="Strofa 4: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="4"><p>Strofa 5: ultimul vers = versul nr.</p><select aria-label="Strofa 5: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="5"><p>Strofa 6: ultimul vers = versul nr.</p><select aria-label="Strofa 6: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="6"><p>Strofa 7: ultimul vers = versul nr.</p><select aria-label="Strofa 7: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="7"><p>Strofa 8: ultimul vers = versul nr.</p><select aria-label="Strofa 8: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="8"><p>Strofa 9: ultimul vers = versul nr.</p><select aria-label="Strofa 9: ultimul vers = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>Verificați observația de la 1c</h3><div class="item" data-ans="b"><p>Ce ați observat?</p><div class="opts col1"><button type="button" data-v="a">Ultimul vers este mereu același.</button><button type="button" data-v="b">Ultimul vers din fiecare strofă este un vers din strofa 1, în ordine.</button><button type="button" data-v="c">Ultimul vers nu apare în strofa 1.</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="sel"><h3>Verificați 1d</h3><div class="item row" data-ans="8"><p>Strofa 10, versul 1 = versul nr.</p><select aria-label="Strofa 10, versul 1 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="7"><p>Strofa 10, versul 2 = versul nr.</p><select aria-label="Strofa 10, versul 2 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="6"><p>Strofa 10, versul 3 = versul nr.</p><select aria-label="Strofa 10, versul 3 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="5"><p>Strofa 10, versul 4 = versul nr.</p><select aria-label="Strofa 10, versul 4 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="4"><p>Strofa 10, versul 5 = versul nr.</p><select aria-label="Strofa 10, versul 5 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="3"><p>Strofa 10, versul 6 = versul nr.</p><select aria-label="Strofa 10, versul 6 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="2"><p>Strofa 10, versul 7 = versul nr.</p><select aria-label="Strofa 10, versul 7 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="1"><p>Strofa 10, versul 8 = versul nr.</p><select aria-label="Strofa 10, versul 8 = versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>Verificați observația de la 1d</h3><div class="item" data-ans="b"><p>În ce ordine reia strofa 10 versurile strofei 1?</p><div class="opts col1"><button type="button" data-v="a">În aceeași ordine.</button><button type="button" data-v="b">În ordine inversă, de la versul 8 la versul 1.</button><button type="button" data-v="c">Într-o ordine amestecată.</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="sel"><h3>Verificați 1e</h3><div class="item row" data-ans="3"><p>Versul 1 rimează cu versul</p><select aria-label="Versul 1 rimează cu versul"><option value="">–</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="4"><p>Versul 2 rimează cu versul</p><select aria-label="Versul 2 rimează cu versul"><option value="">–</option><option value="1">1</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="7"><p>Versul 5 rimează cu versul</p><select aria-label="Versul 5 rimează cu versul"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="item row" data-ans="8"><p>Versul 6 rimează cu versul</p><select aria-label="Versul 6 rimează cu versul"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="7">7</option><option value="8">8</option></select></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+
+  <h2 class="comp">Etapa 2 · Interacțiune <span class="ora">ora 2</span></h2>
+  <div class="card">
+    <p><b>2a.</b> Puneți-vă pe rând întrebări despre poezie și răspundeți-vă. Fiecare pune 2 întrebări. Scrieți dialogul în tabel.</p>
+    <p class="model">Întrebări: Ce înseamnă …? · De ce spune poetul …? · Tu ce crezi despre …?<br>Răspunsuri: Eu cred că … · Pentru mine … · Sunt de acord, pentru că … · Nu sunt de acord, pentru că …</p>
+    <p><b>2b.</b> Alegeți împreună strofa preferată. Discutați și hotărâți amândoi.</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 2</h3><label class="ck"><input type="checkbox"> Fiecare a pus 2 întrebări despre poezie.</label><label class="ck"><input type="checkbox"> Am folosit formulele de mai sus.</label><label class="ck"><input type="checkbox"> Fiecare răspuns are un motiv („pentru că …”).</label><label class="ck"><input type="checkbox"> Am ales strofa preferată și am scris de ce.</label></div>
+
+  <h2 class="comp">Etapa 3 · Mediere <span class="ora">ora 2</span></h2>
+  <div class="card">
+    <p><i>Un coleg a lipsit de la oră și nu a citit poezia. Voi îl ajutați să o înțeleagă.</i></p>
+    <p><b>3a.</b> Alegeți 3 cuvinte din poezie pe care colegul nu le înțelege (de exemplu: socoate, mreje, mișei, zădărnicie). A explică cuvântul 1, B explică cuvântul 2, iar cuvântul 3 îl explicați împreună. Explicați în română, cu cuvinte simple.</p>
+    <p><b>3b.</b> Strofa aleasă la 2b. Spuneți ce zice ea, cu cuvintele voastre, în 2–3 propoziții. Nu copiați versurile.</p>
+    <p><b>3c.</b> Explicați într-o propoziție cum se leagă strofa 1 de celelalte strofe ale poeziei. Spuneți cu cuvintele voastre.</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 3</h3><label class="ck"><input type="checkbox"> Fiecare cuvânt are un cuvânt mai simplu și o propoziție-exemplu.</label><label class="ck"><input type="checkbox"> Explicațiile sunt cu cuvintele noastre, nu copiate.</label><label class="ck"><input type="checkbox"> La 3b nu am copiat versurile.</label><label class="ck"><input type="checkbox"> La 3c am spus unde apar versurile strofei 1 și ce face strofa 10.</label></div>
+
+  <h2 class="comp">Etapa 4 · Producere <span class="ora">ora 3</span></h2>
+  <div class="card">
+    <p><b>4a.</b> Scrieți împreună un text de 5–6 propoziții. Răspundeți la întrebările: Ce sfat ne dă poetul? Ești de acord cu el? De ce? Puteți folosi cuvintele: pentru că, dar, de aceea, de exemplu, în plus.</p>
+    <p><b>4b.</b> Citiți textul cu voce tare, împreună, și corectați greșelile.</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 4</h3><label class="ck"><input type="checkbox"> Textul are 5–6 propoziții.</label><label class="ck"><input type="checkbox"> Am spus ce sfat dă poetul.</label><label class="ck"><input type="checkbox"> Am spus dacă suntem de acord și de ce.</label><label class="ck"><input type="checkbox"> Am folosit cel puțin 2 cuvinte de legătură (pentru că, dar, de aceea …).</label><label class="ck"><input type="checkbox"> Am scris cu diacritice (ă, â, î, ș, ț).</label></div>
+
+  <div class="card">
+    <h3>Autoevaluare</h3>
+    <label class="ck"><input type="checkbox"> Am completat toate tabelele.</label><label class="ck"><input type="checkbox"> Am scris în română, cu diacritice (ă, â, î, ș, ț).</label><label class="ck"><input type="checkbox"> Textul final are cel puțin 5 propoziții.</label><label class="ck"><input type="checkbox"> Am citit textul cu voce tare și l-am corectat.</label><label class="ck"><input type="checkbox"> Fiecare a scris cu culoarea lui.</label>
+  </div>
+  <p class="predare">Predare: gazda apasă „Predă” în Classroom. Colegul scrie în copia lui, pe prima linie: „Lucrez în documentul lui …” și apasă „Predă”.</p>
+</section>
+
 </div></main>
 
 <footer><div class="wrap">© Ora mea de română · Material didactic<br>Text: Mihai Eminescu (domeniu public) · Traducere: Dsida Jenő (domeniu public)<br>Surse: Romanian Voice (textul românesc), Wikiforrás (traducerea maghiară)<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
@@ -155,6 +257,26 @@ const poem=document.getElementById('poem');
 poem.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
 poem.addEventListener('keydown',e=>{const w=e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cur)close();});
+
+/* proiect: verificare */
+document.querySelectorAll('.opts').forEach(o=>{
+  o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  o.addEventListener('click',e=>{const bt=e.target.closest('button'); if(!bt)return;
+    o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===bt?'true':'false'));
+    const it=o.closest('.item'); if(it)it.classList.remove('ok','ko');});
+});
+document.querySelectorAll('.item select').forEach(s=>s.addEventListener('change',()=>s.closest('.item').classList.remove('ok','ko')));
+document.querySelectorAll('.task').forEach(t=>{
+  const k=t.dataset.kind, c=t.querySelector('.check'); if(!c)return;
+  c.addEventListener('click',()=>{
+    const items=[...t.querySelectorAll('.item')]; let ok=0;
+    items.forEach(it=>{let v;
+      if(k==='mc'){const s=it.querySelector('[aria-pressed="true"]'); v=s?s.dataset.v:'';}
+      else v=it.querySelector('select').value;
+      const good=v===it.dataset.ans; it.classList.toggle('ok',good); it.classList.toggle('ko',!good); if(good)ok++;});
+    t.querySelector('.score').textContent=items.length===1?(ok?'Răspuns corect.':'Răspuns greșit.'):'Ai '+ok+' din '+items.length+' răspunsuri corecte.';
+  });
+});
 </script>
 </body>
 </html>
