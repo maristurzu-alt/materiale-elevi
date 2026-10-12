@@ -8,13 +8,13 @@
 <style>
 :root{
   --navy:#0A1E35; --cream:#f7f2e8; --green:#6EE065; --green-ink:#2E7D32;
-  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4; --hl:#e4f6dd;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4; --hl:#e4f6dd; --ok:#2E7D32; --ko:#C62828;
   --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; color-scheme:dark}
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}
 html,body{margin:0}
 body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
 header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
@@ -31,6 +31,7 @@ article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:
 .w:hover,.w:focus-visible{background:var(--hl); outline:none}
 .w[aria-pressed="true"]{background:var(--green); color:#0A1E35; border-bottom-color:transparent}
 .om{color:var(--muted); font-style:italic}
+#panel[hidden]{display:none}
 #panel{position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--card); border-top:3px solid var(--green); box-shadow:0 -6px 20px rgba(0,0,0,.18); padding:.9rem 0 calc(.9rem + env(safe-area-inset-bottom,0px)); max-height:55vh; overflow:auto}
 #panel .wrap{display:block}
 #panel .empty{color:var(--muted); margin:0}
@@ -47,13 +48,53 @@ article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:
 .dex a{color:var(--green-ink); font-weight:600}
 footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); padding-block:1.2rem 2rem}
 footer a{color:var(--green-ink)}
+
+.act{margin-top:2.5rem}
+.sect{font-family:var(--serif); font-size:1.6rem; margin:0 0 1rem; border-top:3px solid var(--green); padding-top:1rem}
+.sect span{font-family:var(--sans); font-size:1rem; font-weight:400; color:var(--muted)}
+.comp{font-family:var(--serif); font-size:1.3rem; color:var(--green-ink); margin:1.8rem 0 .6rem}
+.card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; margin:0 0 1rem}
+.card h3{margin:0 0 .6rem; font-size:1.05rem}
+.card p{margin:.3rem 0}
+.item{padding:.5rem 0; border-top:1px solid var(--line)}
+.item.row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.4rem}
+.item.row p{font-family:var(--serif); font-size:1.1rem; margin:0}
+.opts{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.3rem}
+.item.row .opts{margin:0}
+.opts button,.check,.copy{font:inherit; font-size:.95rem; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer}
+.opts button[aria-pressed="true"]{border-color:var(--fg); box-shadow:inset 0 0 0 1px var(--fg); font-weight:600}
+.opts button.imp[aria-pressed="true"]{background:#fff2a8; color:#0A1E35}
+.opts button.con[aria-pressed="true"]{background:#cfe0ff; color:#0A1E35}
+.tag{padding:0 .3rem; border-radius:4px; color:#0A1E35}.tag.imp{background:#fff2a8}.tag.con{background:#cfe0ff}
+.check,.copy{margin-top:.7rem; background:var(--green); border-color:var(--green); color:#0A1E35; font-weight:600}
+.item.ok{box-shadow:inset 4px 0 0 var(--ok); padding-left:.6rem}
+.item.ko{box-shadow:inset 4px 0 0 var(--ko); padding-left:.6rem}
+.fix{color:var(--ko); font-size:.92rem; margin:.2rem 0 0}
+.score{font-weight:600}
+.line{font:inherit; width:100%; box-sizing:border-box; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.3rem}
+textarea{font:inherit; width:100%; box-sizing:border-box; padding:.5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.5rem}
+.count{color:var(--muted); font-size:.9rem}
+.count.bad{color:var(--ko)}
+.model{color:var(--muted); font-size:.95rem; font-style:italic}
+.req{margin:.2rem 0 .4rem; padding-left:1.2rem}
+.quote{font-family:var(--serif); font-size:1.1rem}
+.vers{font-family:var(--serif); font-size:1.08rem; line-height:1.7; border-left:3px solid var(--green); padding-left:.8rem; margin:.5rem 0 .8rem}
+.tbl{display:grid; gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden; margin:.6rem 0}
+.tbl>div{display:grid; grid-template-columns:1fr 1fr}
+.tbl span{padding:.45rem .6rem; border-top:1px solid var(--line)}
+.tbl span+span{border-left:1px solid var(--line); font-family:var(--serif)}
+.tbl .th span{border-top:0; font-weight:600; background:var(--bg)}
+.ck{display:flex; gap:.5rem; align-items:flex-start; padding:.25rem 0}
+.predare{color:var(--muted); font-size:.95rem}
+.next{display:block; text-align:center; margin:1.5rem 0 0; padding:.8rem 1rem; border-radius:8px; background:var(--navy); color:var(--cream); text-decoration:none; font-weight:600}
+.next:hover,.next:focus-visible{outline:2px solid var(--green); outline-offset:2px}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <div class="eyebrow">Text nonliterar · nivel A2+/B1</div>
   <h1>Managementul timpului</h1>
-  <p class="sub">Lectură ghidată: atinge un cuvânt subliniat și vezi ce înseamnă.</p>
+  <p class="sub">Lectură ghidată și activități: atinge un cuvânt subliniat și vezi ce înseamnă.</p>
 </div></header>
 
 <main><div class="wrap">
@@ -68,9 +109,133 @@ footer a{color:var(--green-ink)}
 <p>Dacă <span class="w" role="button" tabindex="0" data-k="descoperi" aria-pressed="false">descoperi</span> că ai pus prea multe activități pe listă <span class="om" title="Aici lipsește o parte din text.">(...)</span>, <span class="w" role="button" tabindex="0" data-k="cauta" aria-pressed="false">caută</span> să vezi de ce. <span class="om" title="Aici lipsește o parte din text.">(...)</span> Ajustează-ți <span class="w" role="button" tabindex="0" data-k="asteptarile" aria-pressed="false">așteptările</span> și <span class="w" role="button" tabindex="0" data-k="obiceiurile" aria-pressed="false">obiceiurile</span>, <span class="w" role="button" tabindex="0" data-k="astfel" aria-pressed="false">astfel încât</span> să fii mai productiv și mai mulțumit de rezultatele tale săptămâna viitoare! <span class="w" role="button" tabindex="0" data-k="bucura" aria-pressed="false">Bucură-te de</span> rezultatele pe care le <span class="w" role="button" tabindex="0" data-k="obtii" aria-pressed="false">obții</span>!</p>
 <p><span class="om" title="Aici lipsește o parte din text.">(...)</span></p>
 </article>
+<section class="act" id="activitati" aria-label="Activități">
+  <h2 class="sect">Activități <span>· o oră, înainte de „Glossă”</span></h2>
+
+  <div class="card">
+    <h3>Încălzire</h3>
+    <p>Ce faci când ai prea multe teme și prea puțin timp? Alege și spune colegului.</p>
+    <div class="opts free">
+      <button type="button">Fac o listă.</button><button type="button">Încep cu cea mai grea sarcină.</button><button type="button">Amân.</button><button type="button">Cer ajutor.</button><button type="button">Nu știu.</button>
+    </div>
+    <p class="lbl">Completează: Când am prea multe teme, trebuie să …</p>
+    <input class="line" type="text" aria-label="Completează propoziția">
+  </div>
+
+  <h2 class="comp">1. Receptare</h2>
+
+  <div class="card task" data-kind="mc">
+    <h3>Sarcina 1 — Adevărat sau fals</h3>
+    <div class="item" data-ans="A"><p>1. Este bine să îți faci planul înainte de începutul săptămânii.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div>
+    <div class="item" data-ans="F"><p>2. Trebuie să lași planificarea pentru luni dimineață.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div>
+    <div class="item" data-ans="F"><p>3. În agendă poți scrie doar temele pentru școală.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div>
+    <div class="item" data-ans="A"><p>4. Pauzele sunt necesare în timpul zilei.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div>
+    <div class="item" data-ans="A"><p>5. Dacă ai prea multe activități, trebuie să ajustezi planul.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div>
+    <button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p>
+  </div>
+
+  <div class="card task" data-kind="mc">
+    <h3>Sarcina 2 — Alege varianta corectă</h3>
+    <div class="item" data-ans="b"><p>1. E important … un plan.</p><div class="opts"><button type="button" data-v="a">faci</button><button type="button" data-v="b">să faci</button></div></div>
+    <div class="item" data-ans="a"><p>2. … o agendă!</p><div class="opts"><button type="button" data-v="a">Folosește</button><button type="button" data-v="b">Să folosești</button></div></div>
+    <div class="item" data-ans="a"><p>3. Nu … să incluzi pauzele!</p><div class="opts"><button type="button" data-v="a">uita</button><button type="button" data-v="b">să uiți</button></div></div>
+    <div class="item" data-ans="b"><p>4. Trebuie … planul.</p><div class="opts"><button type="button" data-v="a">ajustezi</button><button type="button" data-v="b">să ajustezi</button></div></div>
+    <div class="item" data-ans="a"><p>5. … de rezultate!</p><div class="opts"><button type="button" data-v="a">Bucură-te</button><button type="button" data-v="b">Să te bucuri</button></div></div>
+    <button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p>
+  </div>
+
+  <div class="card task" data-kind="mc">
+    <h3>Sarcina 3 — Găsește verbele</h3>
+    <p>Citește din nou textul. Aceste verbe sunt din text. Sunt la <span class="tag imp">imperativ</span> sau la <span class="tag con">conjunctiv</span>?</p>
+    <div class="item row" data-ans="i"><p>ia-ți</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să îți faci</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="i"><p>Vezi</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să nu lași</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="i"><p>Folosește</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să îți placă</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="i"><p>Fă</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să vezi</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="i"><p>pune-ți</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să fii</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="i"><p>Bucură-te</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <div class="item row" data-ans="c"><p>să îți atingi</p><div class="opts"><button type="button" class="imp" data-v="i">imperativ</button><button type="button" class="con" data-v="c">conjunctiv</button></div></div>
+    <button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p>
+  </div>
+
+  <h2 class="comp">2. Producere</h2>
+
+  <div class="card task" data-kind="text">
+    <h3>Sarcina 4 — Transformă enunțurile</h3>
+    <p class="model">Model: Fă un plan! → Este bine <b>să faci un plan</b>.</p>
+    <div class="item" data-ans="să incluzi pauzele"><p>1. Include pauzele! → Trebuie</p><input class="line" type="text" aria-label="Completează"></div>
+    <div class="item" data-ans="să nu amâni sarcinile"><p>2. Nu amâna sarcinile! → Este important</p><input class="line" type="text" aria-label="Completează"></div>
+    <div class="item" data-ans="să ceri ajutor"><p>3. Cere ajutor! → Poți</p><input class="line" type="text" aria-label="Completează"></div>
+    <div class="item" data-ans="să fii atent la timp|să fii atentă la timp"><p>4. Fii atent la timp! → Este util</p><input class="line" type="text" aria-label="Completează"></div>
+    <div class="item" data-ans="să folosești o agendă"><p>5. Folosește o agendă! → Este bine</p><input class="line" type="text" aria-label="Completează"></div>
+    <button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p>
+  </div>
+
+  <h2 class="comp">3. Interacțiune</h2>
+
+  <div class="card task" data-kind="open" data-min="40" data-max="60">
+    <h3>Sarcina 5 — Răspunde colegului</h3>
+    <p>Colegul tău îți scrie: <b>„Am prea multe teme și nu am timp!”</b></p>
+    <p>Scrie-i un mesaj scurt:</p>
+    <ul class="req"><li>40–60 de cuvinte;</li><li>minimum 3 verbe la imperativ;</li><li>minimum 2 verbe la conjunctiv;</li><li>sfaturi simple și practice.</li></ul>
+    <p class="model">Model: Nu te speria! Fă o listă cu temele tale. Începe cu cea mai importantă. Nu uita să incluzi o pauză. Trebuie să lucrezi puțin, dar în fiecare zi.</p>
+    <textarea rows="5" aria-label="Mesajul tău"></textarea>
+    <p class="count" aria-live="polite">0 cuvinte</p>
+    <button type="button" class="copy">Copiază textul</button>
+  </div>
+
+  <h2 class="comp">4. Mediere</h2>
+
+  <div class="card task" data-kind="open" data-min="15" data-max="40">
+    <h3>Sarcina 6 — Explică pentru un coleg mai mic</h3>
+    <p>Un elev din clasa a V-a citește fraza de mai jos și nu o înțelege:</p>
+    <p class="quote">„E important să nu lași planificarea pe luni dimineața.”</p>
+    <p>Explică-i în limba română, cu cuvintele tale, în 2–3 propoziții simple. Nu copia din text.</p>
+    <textarea rows="4" aria-label="Explicația ta"></textarea>
+    <p class="count" aria-live="polite">0 cuvinte</p>
+    <button type="button" class="copy">Copiază textul</button>
+  </div>
+
+  <h2 class="comp">Spre „Glossă”</h2>
+
+  <div class="card task" data-kind="open" data-min="15" data-max="60">
+    <h3>Sarcina 7 — Compară cele două texte</h3>
+    <p>Citește prima strofă din „Glossă” de Mihai Eminescu:</p>
+    <p class="vers">Vreme trece, vreme vine,<br>Toate-s vechi și nouă toate;<br>Ce e rău și ce e bine<br>Tu te-ntreabă și socoate;<br>Nu spera și nu ai teamă,<br>Ce e val ca valul trece;<br>De te-ndeamnă, de te cheamă,<br>Tu rămâi la toate rece.</p>
+    <div class="tbl" role="table" aria-label="Sfaturi din cele două texte">
+      <div class="th" role="row"><span role="columnheader">Textul nonliterar</span><span role="columnheader">Glossă</span></div>
+      <div role="row"><span role="cell">E bine (…) să îți faci un plan</span><span role="cell">Tu te-ntreabă și socoate</span></div>
+      <div role="row"><span role="cell">Include în agenda ta și pauze!</span><span role="cell">Nu spera și nu ai teamă</span></div>
+      <div role="row"><span role="cell">Ajustează-ți așteptările și obiceiurile</span><span role="cell">Ce e rău și ce e bine</span></div>
+      <div role="row"><span role="cell">Bucură-te de rezultatele pe care le obții!</span><span role="cell">Tu rămâi la toate rece</span></div>
+    </div>
+    <p><b>Ce au în comun sfaturile din textul nonliterar și sfaturile din „Glossă”?</b> Scrie 2–3 propoziții.</p>
+    <textarea rows="4" aria-label="Răspunsul tău"></textarea>
+    <p class="count" aria-live="polite">0 cuvinte</p>
+    <button type="button" class="copy">Copiază textul</button>
+  </div>
+
+  <div class="card">
+    <h3>Autoevaluare</h3>
+    <label class="ck"><input type="checkbox"> Am înțeles ideile principale din textul nonliterar.</label>
+    <label class="ck"><input type="checkbox"> Am găsit verbe la imperativ.</label>
+    <label class="ck"><input type="checkbox"> Am găsit verbe la conjunctiv.</label>
+    <label class="ck"><input type="checkbox"> Am scris un mesaj cu sfaturi în limba română.</label>
+    <label class="ck"><input type="checkbox"> Am făcut legătura cu „Glossă”.</label>
+  </div>
+
+  <p class="predare">Textele de la sarcinile 5, 6 și 7: apasă „Copiază textul” și lipește-le în Classroom.</p>
+
+  <a class="next" href="../glossa/">Mai departe: „Glossă” de Mihai Eminescu →</a>
+</section>
+
 </div></main>
 
-<aside id="panel" aria-live="polite"><div class="wrap" id="pbody"><p class="empty">Atinge un cuvânt subliniat din text.</p></div></aside>
+<aside id="panel" aria-live="polite" hidden><div class="wrap" id="pbody"><p class="empty">Atinge un cuvânt subliniat din text.</p></div></aside>
 
 <footer><div class="wrap">© Ora mea de română · Material didactic<br>Text: PR SNSPA (fragment), <a href="https://snspa.ro/managementul-timpului/" target="_blank" rel="noopener">snspa.ro/managementul-timpului</a> · Sinonime și explicații: Ora mea de română<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
 
@@ -79,11 +244,12 @@ const G={"plan": {"s": ["program"], "a": "", "d": "plan"}, "detaliat": {"s": ["c
 const body=document.getElementById('pbody'), EMPTY='<p class="empty">Atinge un cuvânt subliniat din text.</p>';
 const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let cur=null;
-function close(){ if(cur){cur.setAttribute('aria-pressed','false'); cur.focus(); cur=null;} body.innerHTML=EMPTY; }
+const panel=document.getElementById('panel');
+function close(){ if(cur){cur.setAttribute('aria-pressed','false'); cur.focus(); cur=null;} body.innerHTML=EMPTY; panel.hidden=true; }
 function show(el){
   const g=G[el.dataset.k];
   if(cur)cur.setAttribute('aria-pressed','false');
-  cur=el; el.setAttribute('aria-pressed','true');
+  cur=el; el.setAttribute('aria-pressed','true'); panel.hidden=false;
   const t=el.textContent, url='https://dexonline.ro/definitie/'+encodeURIComponent(g.d);
   body.innerHTML='<div class="top"><h2>'+esc(t)+'</h2><button type="button" class="x" id="close" aria-label="Închide">×</button></div>'
    +'<p class="sin">'+esc(g.s[0])+'</p>'
@@ -94,6 +260,43 @@ const art=document.getElementById('text');
 art.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
 art.addEventListener('keydown',e=>{const w=e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cur)close();});
+/* activități */
+const norm=s=>s.toLowerCase().replace(/ş/g,'ș').replace(/ţ/g,'ț').replace(/[.!?,;:„”"]/g,' ').replace(/\s+/g,' ').trim();
+const words=s=>{const m=s.trim().match(/[^\s]+/g);return m?m.length:0};
+document.querySelectorAll('.opts').forEach(o=>{
+  o.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return;
+    o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    const it=o.closest('.item'); if(it){it.classList.remove('ok','ko'); const f=it.querySelector('.fix'); if(f)f.remove();}
+  });
+  o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));
+});
+document.querySelectorAll('.task').forEach(t=>{
+  const k=t.dataset.kind, chk=t.querySelector('.check');
+  if(chk)chk.addEventListener('click',()=>{
+    const items=[...t.querySelectorAll('.item')]; let ok=0;
+    items.forEach(it=>{
+      let good;
+      const old=it.querySelector('.fix'); if(old)old.remove();
+      if(k==='mc'){const s=it.querySelector('[aria-pressed="true"]'); good=!!s&&s.dataset.v===it.dataset.ans;}
+      else{const v=norm(it.querySelector('input').value); const alts=it.dataset.ans.split('|'); good=alts.some(a=>norm(a)===v);
+        if(!good){const p=document.createElement('p');p.className='fix';p.textContent='Corect: '+alts[0];it.appendChild(p);}}
+      it.classList.toggle('ok',good); it.classList.toggle('ko',!good); if(good)ok++;
+    });
+    t.querySelector('.score').textContent='Ai '+ok+' din '+items.length+' răspunsuri corecte.';
+  });
+  if(k==='open'){
+    const ta=t.querySelector('textarea'), c=t.querySelector('.count'), mn=+t.dataset.min, mx=+t.dataset.max;
+    const upd=()=>{const n=words(ta.value); c.textContent=n+(n===1?' cuvânt':' cuvinte')+' (cerința: '+mn+'–'+mx+')'; c.classList.toggle('bad',n>0&&(n<mn||n>mx));};
+    ta.addEventListener('input',upd); upd();
+    t.querySelector('.copy').addEventListener('click',async e=>{
+      const b=e.currentTarget, txt=ta.value.trim(); if(!txt){ta.focus();return;}
+      try{await navigator.clipboard.writeText(txt); b.textContent='Copiat!';}
+      catch(_){ta.select(); try{document.execCommand('copy'); b.textContent='Copiat!';}catch(__){b.textContent='Selectează și copiază';}}
+      setTimeout(()=>b.textContent='Copiază textul',2000);
+    });
+  }
+});
+
 </script>
 </body>
 </html>
