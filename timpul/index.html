@@ -8,13 +8,13 @@
 <style>
 :root{
   --navy:#0A1E35; --cream:#f7f2e8; --green:#6EE065; --green-ink:#2E7D32;
-  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4; --hl:#e4f6dd; --ok:#2E7D32; --ko:#C62828;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4; --hl:#e4f6dd; --mark:rgba(46,125,50,.55); --ok:#2E7D32; --ko:#C62828;
   --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --mark:rgba(110,224,101,.5); --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; --mark:rgba(110,224,101,.5); --ok:#6EE065; --ko:#ff8a80; color-scheme:dark}
 html,body{margin:0}
 body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
 header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
@@ -27,8 +27,12 @@ main{padding-block:1.5rem 14rem}
 .src{border:1px solid var(--line); background:var(--card); border-radius:8px; padding:.7rem 1rem; margin:0 0 1.5rem; font-size:.95rem}
 .src a{color:var(--green-ink); font-weight:600}
 article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:0 0 1.2rem}
-.w{border-bottom:2px dotted var(--green-ink); cursor:pointer; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.w{border-bottom:1px dotted var(--mark); cursor:pointer; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
 .w:hover,.w:focus-visible{background:var(--hl); outline:none}
+body.fara-marcaj .w{border-bottom-color:transparent}
+.mk{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; margin:0 0 1rem; font-size:.95rem}
+.mk button{font:inherit; padding:.3rem .8rem; border-radius:6px; border:1px solid var(--green); background:var(--green); color:#0A1E35; cursor:pointer; font-weight:600}
+.mk button[aria-pressed="false"]{background:transparent; color:var(--green-ink)}
 .w[aria-pressed="true"]{background:var(--green); color:#0A1E35; border-bottom-color:transparent}
 .om{color:var(--muted); font-style:italic}
 #panel[hidden]{display:none}
@@ -100,6 +104,7 @@ textarea{font:inherit; width:100%; box-sizing:border-box; padding:.5rem; border:
 <main><div class="wrap">
   <p class="note">Citește textul. Când nu înțelegi un cuvânt sau o expresie, atinge-l. Jos apare ce înseamnă.</p>
   <div class="src">Sursa: PR SNSPA, <a href="https://snspa.ro/managementul-timpului/" target="_blank" rel="noopener">„Managementul timpului”</a>, snspa.ro, 21 noiembrie 2022. Fragment; <b>(...)</b> arată că o parte din text lipsește. Citește articolul întreg la sursă.</div>
+  <div class="mk"><span>Cuvinte explicate:</span><button id="btnMk" type="button" aria-pressed="true">vizibile</button></div>
   <article id="text">
 <p>E bine ca înainte de începutul unei noi săptămâni să îți faci un <span class="w" role="button" tabindex="0" data-k="plan" aria-pressed="false">plan</span> mai <span class="w" role="button" tabindex="0" data-k="detaliat" aria-pressed="false">detaliat</span> <span class="w" role="button" tabindex="0" data-k="referitor" aria-pressed="false">referitor la</span> ce vei face în fiecare zi. Unele persoane fac planificarea detaliată duminică după-amiaza. <span class="w" role="button" tabindex="0" data-k="chiar_daca" aria-pressed="false">Chiar dacă</span> nu vei <span class="w" role="button" tabindex="0" data-k="opta" aria-pressed="false">opta pentru</span> această <span class="w" role="button" tabindex="0" data-k="varianta" aria-pressed="false">variantă</span>, e important să nu <span class="w" role="button" tabindex="0" data-k="lasi" aria-pressed="false">lași</span> planificarea pe luni dimineața. Așa vei ști <span class="w" role="button" tabindex="0" data-k="din_timp" aria-pressed="false">din timp</span> tot ce <span class="w" role="button" tabindex="0" data-k="ai_de_facut" aria-pressed="false">ai de făcut</span> în fiecare zi a săptămânii și vei fi <span class="w" role="button" tabindex="0" data-k="productiv" aria-pressed="false">productiv</span> și luni. Îți vei <span class="w" role="button" tabindex="0" data-k="spori" aria-pressed="false">spori</span> șansele să <span class="w" role="button" tabindex="0" data-k="atingi" aria-pressed="false">îți atingi obiectivele</span>.</p>
 <p><span class="om" title="Aici lipsește o parte din text.">(...)</span></p>
@@ -260,6 +265,11 @@ const art=document.getElementById('text');
 art.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
 art.addEventListener('keydown',e=>{const w=e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cur)close();});
+const mkb=document.getElementById('btnMk');
+function setMk(on){document.body.classList.toggle('fara-marcaj',!on);mkb.setAttribute('aria-pressed',on);mkb.textContent=on?'vizibile':'ascunse';try{localStorage.setItem('glosar-marcaj',on?'1':'0')}catch(e){}}
+mkb.addEventListener('click',()=>setMk(mkb.getAttribute('aria-pressed')!=='true'));
+let mkv=null;try{mkv=localStorage.getItem('glosar-marcaj')}catch(e){}
+setMk(mkv!=='0');
 /* activități */
 const norm=s=>s.toLowerCase().replace(/ş/g,'ș').replace(/ţ/g,'ț').replace(/[.!?,;:„”"]/g,' ').replace(/\s+/g,' ').trim();
 const words=s=>{const m=s.trim().match(/[^\s]+/g);return m?m.length:0};

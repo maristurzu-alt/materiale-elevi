@@ -10,13 +10,13 @@
 :root{
   --navy:#0A1E35; --cream:#f7f2e8; --green:#6EE065; --green-ink:#2E7D32;
   --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
-  --hu:#46516b;
+  --hu:#46516b; --mark:rgba(46,125,50,.55); --hl:#e4f6dd;
   --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; color-scheme:dark}
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; --mark:rgba(110,224,101,.5); --hl:#16405a; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hu:#c9cfdc; --green-ink:#6EE065; --mark:rgba(110,224,101,.5); --hl:#16405a; color-scheme:dark}
 html,body{margin:0}
 body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
 header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
@@ -52,6 +52,21 @@ footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); p
   .toggle{margin-left:0}
 }
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+.w{border-bottom:1px dotted var(--mark); cursor:pointer; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+body.fara-marcaj .w{border-bottom-color:transparent}
+.w:hover,.w:focus-visible{background:var(--hl); outline:none}
+.w[aria-pressed="true"]{background:var(--green); color:#0A1E35}
+#panel[hidden]{display:none}
+#panel{position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--card); border-top:3px solid var(--green); box-shadow:0 -6px 20px rgba(0,0,0,.18); padding:.9rem 0 calc(.9rem + env(safe-area-inset-bottom,0px)); max-height:55vh; overflow:auto}
+#panel .top{display:flex; align-items:flex-start; gap:.6rem; margin:0 0 .3rem}
+#panel h2{font-family:var(--serif); font-size:1.25rem; margin:0; line-height:1.3}
+#panel .x{margin-left:auto; flex:none; font:inherit; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:6px; padding:.1rem .6rem; cursor:pointer}
+.sin{margin:0 0 .4rem; font-size:1.1rem; font-weight:600; color:var(--green-ink)}
+.dex{font-size:.95rem}.dex a,footer a{color:var(--green-ink); font-weight:600}
+main{padding-bottom:12rem}
+.toggle{flex-wrap:wrap}
+.pair{display:inline-flex; gap:.4rem; align-items:center; white-space:nowrap}
 </style>
 </head>
 <body>
@@ -63,56 +78,83 @@ footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); p
 </div></header>
 
 <div class="controls"><div class="wrap">
-  <nav class="nav" id="nav" aria-label="Strofe"></nav>
-  <div class="toggle"><span>Traducerea:</span><button id="btnHu" type="button" aria-pressed="true">vizibilă</button></div>
+  <nav class="nav" id="nav" aria-label="Strofe"><a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a><a href="#s9">9</a><a href="#s10">10</a></nav>
+  <div class="toggle"><span class="pair"><span>Traducerea:</span><button id="btnHu" type="button" aria-pressed="true">vizibilă</button></span><span class="pair"><span>Cuvinte explicate:</span><button id="btnMk" type="button" aria-pressed="true">vizibile</button></span></div>
 </div></div>
 
 <main><div class="wrap">
-  <p class="note">Citește mai întâi strofa în limba română. Folosește traducerea doar când nu înțelegi un vers. Poți ascunde traducerea cu butonul de sus.</p>
-  <div id="poem"></div>
+  <p class="note">Citește mai întâi strofa în limba română. Când nu înțelegi un cuvânt subliniat, atinge-l: jos apare ce înseamnă azi. Folosește traducerea doar când nu înțelegi un vers. Poți ascunde traducerea și sublinierile cu butoanele de sus.</p>
+  <div id="poem">
+<section class="strofa" id="s1"><div class="nr">1</div>
+ <div class="col ro"><div class="lang">Română</div><p><span class="w" role="button" tabindex="0" data-k="s1_0" aria-pressed="false">Vreme</span> trece, vreme vine,<br><span class="w" role="button" tabindex="0" data-k="s1_1" aria-pressed="false">Toate-s</span> vechi și nouă toate;<br>Ce e rău și ce e bine<br>Tu <span class="w" role="button" tabindex="0" data-k="s1_2" aria-pressed="false">te-ntreabă</span> și <span class="w" role="button" tabindex="0" data-k="s1_3" aria-pressed="false">socoate</span>;<br>Nu spera și nu ai <span class="w" role="button" tabindex="0" data-k="s1_4" aria-pressed="false">teamă</span>,<br><span class="w" role="button" tabindex="0" data-k="s1_5" aria-pressed="false">Ce e val</span> ca valul trece;<br><span class="w" role="button" tabindex="0" data-k="s1_6" aria-pressed="false">De te-ndeamnă</span>, de te cheamă,<br>Tu <span class="w" role="button" tabindex="0" data-k="s1_7" aria-pressed="false">rămâi la toate rece</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Évre év jön, évre év megy,<br>minden új és minden ódon.<br>Mi rossz és jó, meg ne tévedj,<br>vésd eszedbe minden módon.<br>Bízni balga, félni dőre:<br>nincs hullám, mely el nem illan.<br>Bármi csábit, hajt előre,<br>légy közömbös holtodiglan.</p></div></section>
+<section class="strofa" id="s2"><div class="nr">2</div>
+ <div class="col ro"><div class="lang">Română</div><p>Multe <span class="w" role="button" tabindex="0" data-k="s2_0" aria-pressed="false">trec pe dinainte</span>,<br><span class="w" role="button" tabindex="0" data-k="s2_1" aria-pressed="false">În auz</span> ne sună multe,<br>Cine <span class="w" role="button" tabindex="0" data-k="s2_2" aria-pressed="false">ține toate minte</span><br>Și ar sta să le asculte?...<br>Tu <span class="w" role="button" tabindex="0" data-k="s2_3" aria-pressed="false">așează-te deoparte</span>,<br><span class="w" role="button" tabindex="0" data-k="s2_4" aria-pressed="false">Regăsindu-te</span> pe tine,<br>Când cu zgomote <span class="w" role="button" tabindex="0" data-k="s2_5" aria-pressed="false">deșarte</span><br>Vreme trece, vreme vine.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Áll a vásár este-reggel,<br>és fülünkbe egyre zúgnak.<br>Ki törődik ily sereggel<br>s ád hitelt e sok hazugnak?<br>Elhuzódva mindörökre<br>csöndesen magadba révedj,<br>amíg meddőn mennydörögve<br>évre év jön, évre év megy.</p></div></section>
+<section class="strofa" id="s3"><div class="nr">3</div>
+ <div class="col ro"><div class="lang">Română</div><p>Nici <span class="w" role="button" tabindex="0" data-k="s3_0" aria-pressed="false">încline</span> a ei <span class="w" role="button" tabindex="0" data-k="s3_1" aria-pressed="false">limbă</span><br>Recea <span class="w" role="button" tabindex="0" data-k="s3_2" aria-pressed="false">cumpăn-a gândirii</span><br>Înspre clipa ce se schimbă<br>Pentru <span class="w" role="button" tabindex="0" data-k="s3_3" aria-pressed="false">masca fericirii</span>,<br>Ce din moartea ei se naște<br>Și o clipă <span class="w" role="button" tabindex="0" data-k="s3_4" aria-pressed="false">ține</span> poate;<br>Pentru cine o cunoaște<br>Toate-s vechi și nouă toate.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Félre soha ne billentse<br>agyad mérlegét a gyatra<br>pillanat, mely üdv s szerencse<br>képét hordja pillanatra,<br>s holt örömből nyerve lételt,<br>úgy születik már halódon.<br>Hogyha érted ezt a tételt,<br>minden új és minden ódon.</p></div></section>
+<section class="strofa" id="s4"><div class="nr">4</div>
+ <div class="col ro"><div class="lang">Română</div><p><span class="w" role="button" tabindex="0" data-k="s4_0" aria-pressed="false">Privitor</span> ca la teatru<br>Tu în lume <span class="w" role="button" tabindex="0" data-k="s4_1" aria-pressed="false">să te-nchipui</span>:<br><span class="w" role="button" tabindex="0" data-k="s4_2" aria-pressed="false">Joace unul și pe patru</span>,<br>Totuși tu <span class="w" role="button" tabindex="0" data-k="s4_3" aria-pressed="false">ghici-vei chipu-i</span>,<br>Și de plânge, de se ceartă,<br>Tu în colț <span class="w" role="button" tabindex="0" data-k="s4_4" aria-pressed="false">petreci în tine</span><br>Și-nțelegi din a lor artă<br>Ce e rău și ce e bine.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Oly színháznak véld a földet,<br>hol a játék sohse fogy ki:<br>egy szinész öt maszkot ölthet;<br>mégis tudod róla, hogy ki.<br>Őt páholják vagy ő páhol'?<br>a tanulság és az élv egy.<br>Néző légy, kit rejt a páholy,<br>mi rossz és jó, meg ne tévedj.</p></div></section>
+<section class="strofa" id="s5"><div class="nr">5</div>
+ <div class="col ro"><div class="lang">Română</div><p>Viitorul și trecutul<br>Sunt <span class="w" role="button" tabindex="0" data-k="s5_0" aria-pressed="false">a filei</span> două fețe,<br><span class="w" role="button" tabindex="0" data-k="s5_1" aria-pressed="false">Vede-n capăt</span> începutul<br>Cine știe să le-nvețe;<br>Tot ce-a fost ori o să fie<br>În prezent le-avem pe toate,<br>Dar de-a lor <span class="w" role="button" tabindex="0" data-k="s5_2" aria-pressed="false">zădărnicie</span><br>Te întreabă și socoate.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Múlt s jövő, ha mérni kezded,<br>egy levél két fele-lapja,<br>végén látja, hol a kezdet,<br>ki böngészni kézbe kapja.<br>Mind, mi csak volt vagy leendő,<br>örök jelen földgolyódon,<br>ámhogy hiú s elvetendő,<br>vésd eszedbe minden módon.</p></div></section>
+<section class="strofa" id="s6"><div class="nr">6</div>
+ <div class="col ro"><div class="lang">Română</div><p><span class="w" role="button" tabindex="0" data-k="s6_0" aria-pressed="false">Căci</span> acelorași <span class="w" role="button" tabindex="0" data-k="s6_1" aria-pressed="false">mijloace</span><br><span class="w" role="button" tabindex="0" data-k="s6_2" aria-pressed="false">Se supun</span> <span class="w" role="button" tabindex="0" data-k="s6_3" aria-pressed="false">câte există</span>,<br>Și de mii de ani încoace<br><span class="w" role="button" tabindex="0" data-k="s6_4" aria-pressed="false">Lumea-i</span> veselă și tristă;<br>Alte măști, aceeași <span class="w" role="button" tabindex="0" data-k="s6_5" aria-pressed="false">piesă</span>,<br>Alte guri, <span class="w" role="button" tabindex="0" data-k="s6_6" aria-pressed="false">aceeași gamă</span>,<br><span class="w" role="button" tabindex="0" data-k="s6_7" aria-pressed="false">Amăgit</span> atât de-<span class="w" role="button" tabindex="0" data-k="s6_8" aria-pressed="false">adese</span><br>Nu spera și nu ai teamă.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Egy törvény alá van téve<br>minden itt e tág piacra,<br>s tudja ég, hány ezredéve<br>sír, nevet az ember arca.<br>Új szereplők, régi dráma.<br>Új palackok, régi lőre -<br>csalódottak bölcs siráma:<br>bízni balga, félni dőre.</p></div></section>
+<section class="strofa" id="s7"><div class="nr">7</div>
+ <div class="col ro"><div class="lang">Română</div><p>Nu spera când vezi <span class="w" role="button" tabindex="0" data-k="s7_0" aria-pressed="false">mișeii</span><br><span class="w" role="button" tabindex="0" data-k="s7_1" aria-pressed="false">La izbândă făcând punte</span>,<br><span class="w" role="button" tabindex="0" data-k="s7_2" aria-pressed="false">Te-or întrece</span> <span class="w" role="button" tabindex="0" data-k="s7_3" aria-pressed="false">nătărăii</span>,<br><span class="w" role="button" tabindex="0" data-k="s7_4" aria-pressed="false">De ai fi cu stea în frunte</span>;<br>Teamă n-ai, <span class="w" role="button" tabindex="0" data-k="s7_5" aria-pressed="false">căta-vor</span> iarăși<br>Între <span class="w" role="button" tabindex="0" data-k="s7_6" aria-pressed="false">dânșii</span> <span class="w" role="button" tabindex="0" data-k="s7_7" aria-pressed="false">să se plece</span>,<br><span class="w" role="button" tabindex="0" data-k="s7_8" aria-pressed="false">Nu te prinde lor tovarăș</span>:<br>Ce e val, ca valul trece.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Bízni balga, bízni légvár,<br>eltiportak hogyha győznek,<br>homlokodon csillag ég bár,<br>a fajankók megelőznek.<br>Félni dőre: szolgadölyffel<br>egymást törik majd poriglan -<br>barátságuknak ne ülj fel:<br>nincs hullám, mely el nem illan.</p></div></section>
+<section class="strofa" id="s8"><div class="nr">8</div>
+ <div class="col ro"><div class="lang">Română</div><p>Cu un <span class="w" role="button" tabindex="0" data-k="s8_0" aria-pressed="false">cântec de sirenă</span>,<br>Lumea-ntinde <span class="w" role="button" tabindex="0" data-k="s8_1" aria-pressed="false">lucii mreje</span>;<br>Ca să schimbe-actorii-n scenă,<br><span class="w" role="button" tabindex="0" data-k="s8_2" aria-pressed="false">Te momește în vârteje</span>;<br>Tu <span class="w" role="button" tabindex="0" data-k="s8_3" aria-pressed="false">pe-alături te strecoară</span>,<br>Nu <span class="w" role="button" tabindex="0" data-k="s8_4" aria-pressed="false">băga nici chiar de seamă</span>,<br>Din <span class="w" role="button" tabindex="0" data-k="s8_5" aria-pressed="false">cărarea</span> ta afară<br>De te-ndeamnă, de te cheamă.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Csillog és csal, mint varázslép,<br>a világ, e szép boszorka,<br>s lám, helyetted színre más lép,<br>rád szorult a csapda torka.<br>Száz bűbáj közt bújj keresztül,<br>légy utadnak józan őre,<br>jobb, ha még pillád se rezdül,<br>bármi csábit, hajt előre.</p></div></section>
+<section class="strofa" id="s9"><div class="nr">9</div>
+ <div class="col ro"><div class="lang">Română</div><p><span class="w" role="button" tabindex="0" data-k="s9_0" aria-pressed="false">De te-ating</span>, <span class="w" role="button" tabindex="0" data-k="s9_1" aria-pressed="false">să feri în laturi</span>,<br>De <span class="w" role="button" tabindex="0" data-k="s9_2" aria-pressed="false">hulesc</span>, să taci din gură;<br>Ce mai vrei cu-a tale sfaturi,<br>Dacă știi <span class="w" role="button" tabindex="0" data-k="s9_3" aria-pressed="false">a lor măsură</span>;<br><span class="w" role="button" tabindex="0" data-k="s9_4" aria-pressed="false">Zică</span> toți ce vor să zică,<br><span class="w" role="button" tabindex="0" data-k="s9_5" aria-pressed="false">Treacă-n lume cine-o trece</span>;<br>Ca să <span class="w" role="button" tabindex="0" data-k="s9_6" aria-pressed="false">nu-ndrăgești</span> <span class="w" role="button" tabindex="0" data-k="s9_7" aria-pressed="false">nimică</span>,<br>Tu rămâi la toate rece.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Állj odébb, ha hozzád érnek,<br>hunyj szemet, ha jó barát csal,<br>látva mily mértékre mérnek,<br>mit akarsz még jó tanáccsal?<br>Ki-ki osztozzék a jusson,<br>lármázzék, ha nyelve csiklan.<br>Hogy a lelked révbe jusson,<br>légy közömbös holtodiglan.</p></div></section>
+<section class="strofa" id="s10"><div class="nr">10</div>
+ <div class="col ro"><div class="lang">Română</div><p>Tu rămâi la toate rece,<br>De te-ndeamnă, de te cheamă;<br>Ce e val, ca valul trece,<br>Nu spera și nu ai teamă;<br>Te întreabă și socoate<br>Ce e rău și ce e bine;<br>Toate-s vechi și nouă toate:<br>Vreme trece, vreme vine.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Légy közömbös holtodiglan,<br>bármi csábit, hajt előre.<br>Nincs hullám, mely el nem illan:<br>bízni balga, félni dőre.<br>vésd eszedbe minden módon,<br>mi rossz és jó, meg ne tévedj.<br>Minden új és minden ódon.<br>Évre év jön, évre év megy.</p></div></section>
+</div>
 </div></main>
 
-<footer><div class="wrap">© Ora mea de română · Material didactic<br>Text: Mihai Eminescu (domeniu public) · Traducere: Dsida Jenő (domeniu public)<br>Surse: Romanian Voice (textul românesc), Wikiforrás (traducerea maghiară)</div></footer>
+<footer><div class="wrap">© Ora mea de română · Material didactic<br>Text: Mihai Eminescu (domeniu public) · Traducere: Dsida Jenő (domeniu public)<br>Surse: Romanian Voice (textul românesc), Wikiforrás (traducerea maghiară)<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
+
+<aside id="panel" aria-live="polite" hidden><div class="wrap" id="pbody"></div></aside>
 
 <script>
-const S=[
-["Vreme trece, vreme vine,|Toate-s vechi și nouă toate;|Ce e rău și ce e bine|Tu te-ntreabă și socoate;|Nu spera și nu ai teamă,|Ce e val ca valul trece;|De te-ndeamnă, de te cheamă,|Tu rămâi la toate rece.",
-"Évre év jön, évre év megy,|minden új és minden ódon.|Mi rossz és jó, meg ne tévedj,|vésd eszedbe minden módon.|Bízni balga, félni dőre:|nincs hullám, mely el nem illan.|Bármi csábit, hajt előre,|légy közömbös holtodiglan."],
-["Multe trec pe dinainte,|În auz ne sună multe,|Cine ține toate minte|Și ar sta să le asculte?...|Tu așează-te deoparte,|Regăsindu-te pe tine,|Când cu zgomote deșarte|Vreme trece, vreme vine.",
-"Áll a vásár este-reggel,|és fülünkbe egyre zúgnak.|Ki törődik ily sereggel|s ád hitelt e sok hazugnak?|Elhuzódva mindörökre|csöndesen magadba révedj,|amíg meddőn mennydörögve|évre év jön, évre év megy."],
-["Nici încline a ei limbă|Recea cumpăn-a gândirii|Înspre clipa ce se schimbă|Pentru masca fericirii,|Ce din moartea ei se naște|Și o clipă ține poate;|Pentru cine o cunoaște|Toate-s vechi și nouă toate.",
-"Félre soha ne billentse|agyad mérlegét a gyatra|pillanat, mely üdv s szerencse|képét hordja pillanatra,|s holt örömből nyerve lételt,|úgy születik már halódon.|Hogyha érted ezt a tételt,|minden új és minden ódon."],
-["Privitor ca la teatru|Tu în lume să te-nchipui:|Joace unul și pe patru,|Totuși tu ghici-vei chipu-i,|Și de plânge, de se ceartă,|Tu în colț petreci în tine|Și-nțelegi din a lor artă|Ce e rău și ce e bine.",
-"Oly színháznak véld a földet,|hol a játék sohse fogy ki:|egy szinész öt maszkot ölthet;|mégis tudod róla, hogy ki.|Őt páholják vagy ő páhol'?|a tanulság és az élv egy.|Néző légy, kit rejt a páholy,|mi rossz és jó, meg ne tévedj."],
-["Viitorul și trecutul|Sunt a filei două fețe,|Vede-n capăt începutul|Cine știe să le-nvețe;|Tot ce-a fost ori o să fie|În prezent le-avem pe toate,|Dar de-a lor zădărnicie|Te întreabă și socoate.",
-"Múlt s jövő, ha mérni kezded,|egy levél két fele-lapja,|végén látja, hol a kezdet,|ki böngészni kézbe kapja.|Mind, mi csak volt vagy leendő,|örök jelen földgolyódon,|ámhogy hiú s elvetendő,|vésd eszedbe minden módon."],
-["Căci acelorași mijloace|Se supun câte există,|Și de mii de ani încoace|Lumea-i veselă și tristă;|Alte măști, aceeași piesă,|Alte guri, aceeași gamă,|Amăgit atât de-adese|Nu spera și nu ai teamă.",
-"Egy törvény alá van téve|minden itt e tág piacra,|s tudja ég, hány ezredéve|sír, nevet az ember arca.|Új szereplők, régi dráma.|Új palackok, régi lőre -|csalódottak bölcs siráma:|bízni balga, félni dőre."],
-["Nu spera când vezi mișeii|La izbândă făcând punte,|Te-or întrece nătărăii,|De ai fi cu stea în frunte;|Teamă n-ai, căta-vor iarăși|Între dânșii să se plece,|Nu te prinde lor tovarăș:|Ce e val, ca valul trece.",
-"Bízni balga, bízni légvár,|eltiportak hogyha győznek,|homlokodon csillag ég bár,|a fajankók megelőznek.|Félni dőre: szolgadölyffel|egymást törik majd poriglan -|barátságuknak ne ülj fel:|nincs hullám, mely el nem illan."],
-["Cu un cântec de sirenă,|Lumea-ntinde lucii mreje;|Ca să schimbe-actorii-n scenă,|Te momește în vârteje;|Tu pe-alături te strecoară,|Nu băga nici chiar de seamă,|Din cărarea ta afară|De te-ndeamnă, de te cheamă.",
-"Csillog és csal, mint varázslép,|a világ, e szép boszorka,|s lám, helyetted színre más lép,|rád szorult a csapda torka.|Száz bűbáj közt bújj keresztül,|légy utadnak józan őre,|jobb, ha még pillád se rezdül,|bármi csábit, hajt előre."],
-["De te-ating, să feri în laturi,|De hulesc, să taci din gură;|Ce mai vrei cu-a tale sfaturi,|Dacă știi a lor măsură;|Zică toți ce vor să zică,|Treacă-n lume cine-o trece;|Ca să nu-ndrăgești nimică,|Tu rămâi la toate rece.",
-"Állj odébb, ha hozzád érnek,|hunyj szemet, ha jó barát csal,|látva mily mértékre mérnek,|mit akarsz még jó tanáccsal?|Ki-ki osztozzék a jusson,|lármázzék, ha nyelve csiklan.|Hogy a lelked révbe jusson,|légy közömbös holtodiglan."],
-["Tu rămâi la toate rece,|De te-ndeamnă, de te cheamă;|Ce e val, ca valul trece,|Nu spera și nu ai teamă;|Te întreabă și socoate|Ce e rău și ce e bine;|Toate-s vechi și nouă toate:|Vreme trece, vreme vine.",
-"Légy közömbös holtodiglan,|bármi csábit, hajt előre.|Nincs hullám, mely el nem illan:|bízni balga, félni dőre.|vésd eszedbe minden módon,|mi rossz és jó, meg ne tévedj.|Minden új és minden ódon.|Évre év jön, évre év megy."]
-];
-const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const lines=t=>t.split('|').map(l=>esc(l)).join('<br>');
-const poem=document.getElementById('poem'), nav=document.getElementById('nav');
-S.forEach(([ro,hu],i)=>{
-  const n=i+1;
-  poem.insertAdjacentHTML('beforeend',
-   `<section class="strofa" id="s${n}"><div class="nr">${n}</div>
-     <div class="col ro"><div class="lang">Română</div><p>${lines(ro)}</p></div>
-     <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>${lines(hu)}</p></div></section>`);
-  nav.insertAdjacentHTML('beforeend',`<a href="#s${n}">${n}</a>`);
-});
+const G={"s1_0": {"s": ["timp"], "d": "vreme"}, "s1_1": {"s": ["toate sunt"], "d": "tot"}, "s1_2": {"s": ["întreabă-te"], "d": "întreba"}, "s1_3": {"s": ["gândește"], "d": "socoti"}, "s1_4": {"s": ["frică"], "d": "teamă"}, "s1_5": {"s": ["ce nu durează"], "d": "val"}, "s1_6": {"s": ["dacă te împinge"], "d": "îndemna"}, "s1_7": {"s": ["rămâi calm la toate"], "d": "rece"}, "s2_0": {"s": ["trec prin fața noastră"], "d": "dinainte"}, "s2_1": {"s": ["în urechi"], "d": "auz"}, "s2_2": {"s": ["își amintește totul"], "d": "minte"}, "s2_3": {"s": ["stai la o parte"], "d": "deoparte"}, "s2_4": {"s": ["găsindu-te din nou"], "d": "regăsi"}, "s2_5": {"s": ["fără rost"], "d": "deșert"}, "s3_0": {"s": ["să se aplece"], "d": "înclina"}, "s3_1": {"s": ["acul"], "d": "limbă"}, "s3_2": {"s": ["balanța minții"], "d": "cumpănă"}, "s3_3": {"s": ["fericirea falsă"], "d": "mască"}, "s3_4": {"s": ["durează"], "d": "ține"}, "s4_0": {"s": ["spectator"], "d": "privitor"}, "s4_1": {"s": ["să te imaginezi"], "d": "închipui"}, "s4_2": {"s": ["chiar dacă unul joacă patru roluri"], "d": "juca"}, "s4_3": {"s": ["vei recunoaște cine e"], "d": "chip"}, "s4_4": {"s": ["stai cu gândurile tale"], "d": "petrece"}, "s5_0": {"s": ["ale paginii"], "d": "filă"}, "s5_1": {"s": ["vede la sfârșit"], "d": "capăt"}, "s5_2": {"s": ["lipsă de rost"], "d": "zădărnicie"}, "s6_0": {"s": ["pentru că"], "d": "căci"}, "s6_1": {"s": ["legi"], "d": "mijloc"}, "s6_2": {"s": ["se conformează"], "d": "supune"}, "s6_3": {"s": ["toate lucrurile"], "d": "cât"}, "s6_4": {"s": ["lumea e"], "d": "lume"}, "s6_5": {"s": ["piesă de teatru"], "d": "piesă"}, "s6_6": {"s": ["aceleași note"], "d": "gamă"}, "s6_7": {"s": ["păcălit"], "d": "amăgi"}, "s6_8": {"s": ["des"], "d": "adesea"}, "s7_0": {"s": ["oamenii răi"], "d": "mișel"}, "s7_1": {"s": ["ajutându-se să câștige"], "d": "izbândă"}, "s7_2": {"s": ["te vor depăși"], "d": "întrece"}, "s7_3": {"s": ["proștii"], "d": "nătărău"}, "s7_4": {"s": ["chiar dacă ai fi cel mai bun"], "d": "stea"}, "s7_5": {"s": ["vor încerca"], "d": "căta"}, "s7_6": {"s": ["ei"], "d": "dânsul"}, "s7_7": {"s": ["să se încline"], "d": "pleca"}, "s7_8": {"s": ["nu te face prietenul lor"], "d": "tovarăș"}, "s8_0": {"s": ["cântec care te păcălește"], "d": "sirenă"}, "s8_1": {"s": ["plase strălucitoare"], "d": "mreajă"}, "s8_2": {"s": ["te atrage în încurcături"], "d": "momi"}, "s8_3": {"s": ["treci încet pe lângă"], "d": "strecura"}, "s8_4": {"s": ["da deloc atenție"], "d": "seamă"}, "s8_5": {"s": ["drumul"], "d": "cărare"}, "s9_0": {"s": ["dacă te lovesc"], "d": "atinge"}, "s9_1": {"s": ["să te dai la o parte"], "d": "feri"}, "s9_2": {"s": ["vorbesc urât"], "d": "huli"}, "s9_3": {"s": ["cât valorează ei"], "d": "măsură"}, "s9_4": {"s": ["să zică"], "d": "zice"}, "s9_5": {"s": ["să treacă oricine vrea"], "d": "trece"}, "s9_6": {"s": ["nu iubești"], "d": "îndrăgi"}, "s9_7": {"s": ["nimic"], "d": "nimic"}};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* traducerea */
 const b=document.getElementById('btnHu');
 function setHu(on){document.body.classList.toggle('fara-hu',!on);b.setAttribute('aria-pressed',on);b.textContent=on?'vizibilă':'ascunsă';try{localStorage.setItem('glossa-hu',on?'1':'0')}catch(e){}}
 b.addEventListener('click',()=>setHu(b.getAttribute('aria-pressed')!=='true'));
 let saved=null;try{saved=localStorage.getItem('glossa-hu')}catch(e){}
 setHu(saved!=='0');
+/* sublinierile */
+const m=document.getElementById('btnMk');
+function setMk(on){document.body.classList.toggle('fara-marcaj',!on);m.setAttribute('aria-pressed',on);m.textContent=on?'vizibile':'ascunse';try{localStorage.setItem('glosar-marcaj',on?'1':'0')}catch(e){}}
+m.addEventListener('click',()=>setMk(m.getAttribute('aria-pressed')!=='true'));
+let mk=null;try{mk=localStorage.getItem('glosar-marcaj')}catch(e){}
+setMk(mk!=='0');
+/* glosarul */
+const panel=document.getElementById('panel'), body=document.getElementById('pbody');
+let cur=null;
+function close(){ if(cur){cur.setAttribute('aria-pressed','false'); cur.focus(); cur=null;} body.innerHTML=''; panel.hidden=true; }
+function show(el){
+  const g=G[el.dataset.k];
+  if(cur)cur.setAttribute('aria-pressed','false');
+  cur=el; el.setAttribute('aria-pressed','true'); panel.hidden=false;
+  const url='https://dexonline.ro/definitie/'+encodeURIComponent(g.d);
+  body.innerHTML='<div class="top"><h2>'+esc(el.textContent)+'</h2><button type="button" class="x" id="close" aria-label="Închide">×</button></div>'
+   +'<p class="sin">'+esc(g.s[0])+'</p>'
+   +'<div class="dex">Caută în dicționar: <a href="'+url+'" target="_blank" rel="noopener">dexonline.ro</a></div>';
+  document.getElementById('close').onclick=close;
+}
+const poem=document.getElementById('poem');
+poem.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
+poem.addEventListener('keydown',e=>{const w=e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cur)close();});
 </script>
 </body>
 </html>
