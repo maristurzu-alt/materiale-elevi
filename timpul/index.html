@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managementul timpului — lectură ghidată</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap">
+<style>
+:root{
+  --navy:#0A1E35; --cream:#f7f2e8; --green:#6EE065; --green-ink:#2E7D32;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4; --hl:#e4f6dd;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --hl:#16405a; --green-ink:#6EE065; color-scheme:dark}
+html,body{margin:0}
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6}
+header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
+.wrap{max-width:760px; margin:0 auto; padding-inline:16px}
+.eyebrow{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--green)}
+h1{font-family:var(--serif); font-size:clamp(2rem,7vw,3rem); margin:.2rem 0 .3rem; line-height:1.1; text-wrap:balance}
+.sub{color:#d9d3c6; margin:0}
+main{padding-block:1.5rem 14rem}
+.note{color:var(--muted); font-size:.95rem; margin:0 0 1.2rem}
+.src{border:1px solid var(--line); background:var(--card); border-radius:8px; padding:.7rem 1rem; margin:0 0 1.5rem; font-size:.95rem}
+.src a{color:var(--green-ink); font-weight:600}
+article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:0 0 1.2rem}
+.w{font:inherit; color:inherit; background:none; border:0; border-bottom:2px dotted var(--green-ink); padding:0; margin:0; cursor:pointer; border-radius:2px}
+.w:hover,.w:focus-visible{background:var(--hl); outline:none}
+.w[aria-pressed="true"]{background:var(--green); color:#0A1E35; border-bottom-color:transparent}
+.om{color:var(--muted); font-style:italic}
+#panel{position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--card); border-top:3px solid var(--green); box-shadow:0 -6px 20px rgba(0,0,0,.18); padding:.9rem 0 calc(.9rem + env(safe-area-inset-bottom,0px)); max-height:55vh; overflow:auto}
+#panel .wrap{display:block}
+#panel .empty{color:var(--muted); margin:0}
+#panel h2{font-family:var(--serif); font-size:1.25rem; margin:0 0 .4rem; display:flex; align-items:center; gap:.6rem}
+#panel .x{margin-left:auto; font:inherit; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:6px; padding:.1rem .6rem; cursor:pointer}
+.sin{list-style:none; margin:0 0 .5rem; padding:0}
+.sin li{display:flex; gap:.6rem; align-items:baseline; padding:.15rem 0}
+.lv{flex:none; min-width:2.3rem; text-align:center; font-size:.8rem; font-weight:600; border-radius:5px; padding:.05rem .35rem}
+.A2{background:#c9f2c4; color:#0A1E35}.B1{background:#ffe6a8; color:#0A1E35}.B2{background:#cfe0ff; color:#0A1E35}
+.dex{font-size:.95rem}
+.dex a{color:var(--green-ink); font-weight:600}
+footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); padding-block:1.2rem 2rem}
+footer a{color:var(--green-ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Text nonliterar · nivel A2+/B1</div>
+  <h1>Managementul timpului</h1>
+  <p class="sub">Lectură ghidată: atinge un cuvânt subliniat și vezi sinonime.</p>
+</div></header>
+
+<main><div class="wrap">
+  <p class="note">Citește textul. Când nu înțelegi un cuvânt sau o expresie, atinge-l. Jos apar sinonime: <span class="lv A2">A2</span> simplu, <span class="lv B1">B1</span> mai avansat, <span class="lv B2">B2</span> și mai avansat.</p>
+  <div class="src">Sursa textului: <a href="https://snspa.ro/managementul-timpului/" target="_blank" rel="noopener">Managementul timpului, snspa.ro</a> (SNSPA). Citește articolul întreg la sursă.</div>
+  <article id="text"></article>
+</div></main>
+
+<aside id="panel" aria-live="polite"><div class="wrap" id="pbody"><p class="empty">Atinge un cuvânt subliniat din text.</p></div></aside>
+
+<footer><div class="wrap">© Ora mea de română · Material didactic<br>Text: SNSPA, <a href="https://snspa.ro/managementul-timpului/" target="_blank" rel="noopener">snspa.ro/managementul-timpului</a> · Sinonime și explicații: Ora mea de română<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
+
+<script>
+/* cheie: [formă de bază, [[nivel, sinonim], ...], termen pentru dexonline] */
+const G={
+fiplan:["să îți faci un plan",[["A2","să scrii un plan"],["B1","să întocmești un plan"],["B2","să elaborezi un plan"]],"întocmi"],
+detaliat:["detaliat",[["A2","pe larg"],["B1","amănunțit"],["B2","minuțios"]],"detaliat"],
+referitor:["referitor la",[["A2","despre"],["B1","cu privire la"],["B2","în legătură cu"]],"referitor"],
+planif:["planificare",[["A2","plan"],["B1","organizare"],["B2","programare"]],"planificare"],
+chiar:["chiar dacă",[["A2","deși"],["B1","cu toate că"],["B2","în pofida faptului că"]],"chiar"],
+opta:["a opta pentru",[["A2","a alege"],["B1","a se decide pentru"],["B2","a se orienta spre"]],"opta"],
+varianta:["variantă",[["A2","posibilitate"],["B1","soluție"],["B2","alternativă"]],"variantă"],
+lasa:["a lăsa planificarea pe luni",[["A2","a face planul abia luni"],["B1","a amâna planificarea pe luni"],["B2","a împinge planificarea pe luni"]],"lăsa"],
+dintimp:["din timp",[["A2","devreme"],["B1","din vreme"],["B2","în prealabil"]],"timp"],
+productiv:["productiv",[["A2","care face multe lucruri"],["B1","eficient"],["B2","rodnic"]],"productiv"],
+spori:["a spori",[["A2","a crește"],["B1","a mări"],["B2","a amplifica"]],"spori"],
+atinge:["a-și atinge obiectivele",[["A2","a face ce ți-ai propus"],["B1","a-ți îndeplini scopurile"],["B2","a-ți realiza țintele"]],"atinge"],
+sanse:["șanse",[["A2","posibilități"],["B1","ocazii"],["B2","perspective"]],"șansă"],
+electronica:["electronic",[["A2","pe telefon sau pe calculator"],["B1","digital"],["B2","informatizat"]],"electronic"],
+tiparita:["tipărit",[["A2","pe hârtie"],["B1","imprimat"],["B2","pe suport de hârtie"]],"tipărit"],
+pezile:["pe zile",[["A2","în fiecare zi"],["B1","zi cu zi"],["B2","câte o zi"]],"zi"],
+include:["a include",[["A2","a pune"],["B1","a adăuga"],["B2","a încorpora"]],"include"],
+auloc:["a avea loc",[["A2","a se face"],["B1","a se desfășura"],["B2","a se petrece"]],"loc"],
+fizic:["fizic",[["A2","în realitate"],["B1","în persoană"],["B2","față în față"]],"fizic"],
+cumar:["cum ar fi",[["A2","de exemplu"],["B1","precum"],["B2","ca de pildă"]],"cum"],
+particip:["participare",[["A2","faptul că ești acolo"],["B1","prezență"],["B2","implicare"]],"participare"],
+webinar:["webinar",[["A2","curs pe internet"],["B1","seminar online"],["B2","conferință online"]],"webinar"],
+legate:["legat de",[["A2","despre"],["B1","care ține de"],["B2","aferent"]],"legat"],
+functioneaza:["a funcționa",[["A2","a merge"],["B1","a da rezultate"],["B2","a se dovedi eficient"]],"funcționa"],
+pregatit:["a pregăti",[["A2","a face"],["B1","a întocmi"],["B2","a elabora"]],"pregăti"],
+ajusta:["a ajusta",[["A2","a schimba puțin"],["B1","a corecta"],["B2","a adapta"]],"ajusta"],
+programa:["a programa",[["A2","a planifica"],["B1","a organiza"],["B2","a eșalona"]],"programa"],
+slot:["slot",[["A2","perioadă de timp"],["B1","interval"],["B2","segment orar"]],"slot"],
+cate:["de câte o oră",[["A2","fiecare de o oră"],["B1","cu durata de o oră fiecare"]],"câte"],
+oricat:["oricât de mult",[["A2","chiar dacă ai foarte mult"],["B1","indiferent cât"],["B2","oricât de mare ar fi"]],"oricât"],
+hidrata:["a se hidrata",[["A2","a bea apă"],["B1","a-ți da organismului apă"],["B2","a-ți menține hidratarea"]],"hidrata"],
+miscare:["a face mișcare",[["A2","a fi activ"],["B1","a face sport"],["B2","a practica activitate fizică"]],"mișcare"],
+descoperi:["a descoperi",[["A2","a vedea"],["B1","a observa"],["B2","a constata"]],"descoperi"],
+cauta:["a căuta să",[["A2","a încerca să"],["B1","a se strădui să"],["B2","a se angaja să"]],"căuta"],
+asteptari:["așteptări",[["A2","ce îți dorești"],["B1","speranțe"],["B2","pretenții"]],"așteptare"],
+obiceiuri:["obicei",[["A2","lucrul pe care îl faci des"],["B1","deprindere"],["B2","comportament"]],"obicei"],
+astfel:["astfel încât",[["A2","ca să"],["B1","așa încât"],["B2","în așa fel încât"]],"astfel"],
+multumit:["mulțumit",[["A2","bucuros"],["B1","satisfăcut"],["B2","împăcat"]],"mulțumit"],
+bucura:["a se bucura de",[["A2","a fi fericit pentru"],["B1","a se simți bine datorită"],["B2","a savura"]],"bucura"],
+obtii:["a obține",[["A2","a primi"],["B1","a căpăta"],["B2","a dobândi"]],"obține"]
+};
+/* {cheie|cuvânt din text} ; (...) = omisiune */
+const P=[
+"E bine ca, înainte de începutul unei noi săptămâni, {fiplan|să îți faci un plan} mai {detaliat|detaliat} {referitor|referitor la} ce vei face în fiecare zi. Unele persoane fac {planif|planificarea} {detaliat|detaliată} duminică după-amiaza. {chiar|Chiar dacă} nu vei {opta|opta pentru} această {varianta|variantă}, e important să nu {lasa|lași planificarea pe luni} dimineața. Așa vei ști {dintimp|din timp} tot ce ai de făcut în fiecare zi a săptămânii și vei fi {productiv|productiv} și luni. Îți vei {spori|spori} {sanse|șansele} să {atinge|îți atingi obiectivele}.",
+"Folosește o agendă {electronica|electronică} sau ia-ți o agendă {tiparita|tipărită}, care să îți placă, și pune-ți, înainte de începerea săptămânii, toate activitățile în ea, {pezile|pe zile}. {include|Include} în agendă și activitățile care {auloc|au loc} {fizic|fizic}, de exemplu mersul la cursuri, și activitățile care au loc online, {cumar|cum ar fi} {particip|participarea} la un {webinar|webinar}.",
+"Adaugă în agenda zilnică toate activitățile importante pe care le ai de făcut, nu doar pe cele {legate|legate de} școală. Fă un test! Vezi cum {functioneaza|funcționează} pentru tine planul pe care l-ai {pregatit|pregătit} pentru o săptămână și {ajusta|ajustează} apoi planul pentru următoarea săptămână.",
+"{programa|Programează}-ți activitatea zilnică în {slot|sloturi} {cate|de câte o oră} sau de treizeci de minute. Include în agenda ta și pauze! {oricat|Oricât de mult} ai avea de muncit, pauzele sunt necesare pentru a te {hidrata|hidrata}, {miscare|a face mișcare} și a dormi.",
+"Dacă {descoperi|descoperi} că ai pus prea multe activități pe listă, {cauta|caută să} vezi de ce. {ajusta|Ajustează}-ți {asteptari|așteptările} și {obiceiuri|obiceiurile}, {astfel|astfel încât} să fii mai productiv și mai {multumit|mulțumit} de rezultatele tale săptămâna viitoare! {bucura|Bucură-te de} rezultatele pe care le {obtii|obții}!"
+];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+document.getElementById('text').innerHTML=P.map(p=>'<p>'+esc(p).replace(/\{(\w+)\|([^}]+)\}/g,(m,k,t)=>'<button type="button" class="w" data-k="'+k+'" aria-pressed="false">'+t+'</button>')+'</p>').join('');
+const body=document.getElementById('pbody');
+let cur=null;
+function show(btn){
+  const k=btn.dataset.k,g=G[k];
+  if(cur)cur.setAttribute('aria-pressed','false');
+  cur=btn;btn.setAttribute('aria-pressed','true');
+  const url='https://dexonline.ro/definitie/'+encodeURIComponent(g[2]);
+  body.innerHTML='<h2>'+esc(g[0])+'<button type="button" class="x" id="close" aria-label="Închide">×</button></h2>'
+   +'<ul class="sin">'+g[1].map(s=>'<li><span class="lv '+s[0]+'">'+s[0]+'</span><span>'+esc(s[1])+'</span></li>').join('')+'</ul>'
+   +'<div class="dex">Vezi și în dicționar: <a href="'+url+'" target="_blank" rel="noopener">dexonline.ro</a></div>';
+  document.getElementById('close').onclick=()=>{btn.setAttribute('aria-pressed','false');cur=null;body.innerHTML='<p class="empty">Atinge un cuvânt subliniat din text.</p>';};
+}
+document.getElementById('text').addEventListener('click',e=>{const b=e.target.closest('.w');if(b)show(b);});
+</script>
+</body>
+</html>
