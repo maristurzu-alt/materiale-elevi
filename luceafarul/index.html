@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luceafărul · Az esticsillag</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap">
+<style>
+:root{
+  --navy:#0A1E35; --cream:#f7f2e8; --lime:#B6FF00;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
+  --mark:#0A1E35; --ko:#C62828; --hu:#46516b; --link:#0A1E35;
+  --blue:#cfe0ff; --yellow:#fff2a8;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --mark:#f5f0e8; --ko:#ff8a80; --hu:#c9cfdc; --link:#B6FF00; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --mark:#f5f0e8; --ko:#ff8a80; --hu:#c9cfdc; --link:#B6FF00; color-scheme:dark}
+html,body{margin:0}
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6; overflow-wrap:break-word}
+header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
+.wrap{max-width:760px; margin:0 auto; padding-inline:16px}
+.brand{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--lime); margin:0 0 .3rem}
+.eyebrow{display:inline-block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; background:var(--lime); color:#0A1E35; padding:.1rem .5rem; border-radius:4px; font-weight:600}
+h1{font-family:var(--serif); font-size:clamp(1.9rem,7vw,3rem); margin:.4rem 0 .3rem; line-height:1.12; text-wrap:balance}
+h1 em{font-weight:400}
+.sub{color:#d9d3c6; margin:0}
+main{padding-block:1.5rem 14rem}
+.note{color:var(--muted); font-size:.95rem; margin:0 0 1.2rem}
+.src{border:1px solid var(--line); background:var(--card); border-radius:8px; padding:.7rem 1rem; margin:1.5rem 0; font-size:.95rem}
+a{color:var(--link)}
+.src a,footer a,.dex a{font-weight:600; text-underline-offset:3px}
+.bar{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin:0 0 1rem; font-size:.95rem}
+.pair{display:inline-flex; flex-wrap:wrap; gap:.4rem; align-items:center}
+.tog{font:inherit; padding:.3rem .8rem; border-radius:6px; border:1px solid var(--fg); background:transparent; color:var(--fg); cursor:pointer; font-weight:600}
+.tog[aria-pressed="true"]{background:var(--lime); border-color:var(--lime); color:#0A1E35}
+.tog:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:0 0 1.2rem}
+.w{border-bottom:1px dotted var(--mark); cursor:pointer; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.w:hover,.w:focus-visible,.w[aria-pressed="true"]{background:var(--lime); color:#0A1E35; outline:none}
+body.fara-marcaj .w{border-bottom-color:transparent}
+#panel[hidden]{display:none}
+#panel{position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--card); border-top:3px solid var(--lime); box-shadow:0 -6px 20px rgba(0,0,0,.18); padding:.9rem 0 calc(.9rem + env(safe-area-inset-bottom,0px)); max-height:55vh; overflow:auto}
+#panel .top{display:flex; align-items:flex-start; gap:.6rem; margin:0 0 .3rem}
+#panel h2{font-family:var(--serif); font-size:1.25rem; margin:0; line-height:1.3}
+#panel .x{margin-left:auto; flex:none; font:inherit; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:6px; padding:.1rem .6rem; cursor:pointer}
+.sin{margin:0 0 .4rem; font-size:1.1rem; font-weight:600}
+.dex{font-size:.95rem}
+footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); padding-block:1.2rem 2rem}
+.act{margin-top:2.5rem}
+.sect{font-family:var(--serif); font-size:1.6rem; margin:0 0 1rem; border-top:3px solid var(--lime); padding-top:1rem}
+.sect span,.ora{font-family:var(--sans); font-size:1rem; font-weight:400; color:var(--muted)}
+.comp{font-family:var(--serif); font-size:1.3rem; margin:1.8rem 0 .6rem}
+.card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; margin:0 0 1rem}
+.card h3{margin:0 0 .6rem; font-size:1.05rem}
+.card p{margin:.3rem 0}
+.item{padding:.5rem 0; border-top:1px solid var(--line)}
+.item p{margin:0 0 .3rem}
+.item.row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.4rem}
+.item.row p{font-family:var(--serif); font-size:1.1rem; margin:0}
+.opts{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.3rem}
+.item.row .opts{margin:0}
+.opts.col1{flex-direction:column; align-items:stretch}
+.opts.col1 button{text-align:left}
+.opts button,.check,.copy{font:inherit; font-size:.95rem; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer}
+.opts button[aria-pressed="true"]{border-color:var(--fg); box-shadow:inset 0 0 0 1px var(--fg); font-weight:600}
+.opts button.c1[aria-pressed="true"],.tag.c1{background:var(--blue); color:#0A1E35}
+.opts button.c2[aria-pressed="true"],.tag.c2{background:var(--yellow); color:#0A1E35}
+.opts button.c3[aria-pressed="true"],.tag.c3{background:var(--lime); color:#0A1E35}
+.tag{padding:0 .35rem; border-radius:4px}
+.check,.copy{margin-top:.7rem; background:var(--lime); border-color:var(--lime); color:#0A1E35; font-weight:600}
+.item.ok{background:var(--lime); color:#0A1E35; padding-inline:.6rem; border-radius:6px}
+.item.ok .opts button{color:#0A1E35}
+.item.ko{box-shadow:inset 4px 0 0 var(--ko); padding-left:.6rem}
+.item.ko .opts button[aria-pressed="true"],.item.ko select,.item.ko input{border-color:var(--ko); color:var(--ko)}
+.fix{color:var(--ko); font-size:.92rem; margin:.2rem 0 0}
+.item.ok .fix{display:none}
+.score{font-weight:600}
+.line,select{font:inherit; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg)}
+.line{width:100%; box-sizing:border-box; margin-top:.3rem}
+textarea{font:inherit; width:100%; box-sizing:border-box; padding:.5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.5rem}
+.count{color:var(--muted); font-size:.9rem}
+.model{color:var(--muted); font-size:.95rem}
+.quote{font-family:var(--serif); font-size:1.1rem}
+.vers{font-family:var(--serif); font-size:1.08rem; line-height:1.7; border-left:3px solid var(--lime); padding-left:.8rem; margin:.5rem 0 .8rem}
+.tbl{border:1px solid var(--line); border-radius:6px; overflow:hidden; margin:.6rem 0}
+.tbl>div{display:grid; grid-template-columns:1fr 1fr}
+.tbl span{padding:.45rem .6rem; border-top:1px solid var(--line); min-width:0}
+.tbl span+span{border-left:1px solid var(--line); font-family:var(--serif)}
+.tbl .th span{border-top:0; font-weight:600; background:var(--bg)}
+.ck{display:flex; gap:.5rem; align-items:flex-start; padding:.25rem 0}
+.ck input{margin-top:.35rem; accent-color:#0A1E35}
+.predare{color:var(--muted); font-size:.95rem}
+.btn{display:block; text-align:center; margin:1.5rem 0 0; padding:.8rem 1rem; border-radius:8px; background:var(--navy); color:var(--cream); text-decoration:none; font-weight:600; border:1px solid var(--lime)}
+.btn.lime{background:var(--lime); color:#0A1E35; border-color:var(--lime); margin:0 0 1.5rem}
+.btn:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+details.box{border:1px solid var(--line); border-left:4px solid var(--lime); background:var(--card); border-radius:8px; margin:0 0 1rem; padding:.2rem 1rem}
+details.box summary{cursor:pointer; font-weight:600; padding:.5rem 0}
+details.box p{font-family:var(--serif); font-size:1.08rem; line-height:1.85}
+.gamma{position:relative; width:100%; aspect-ratio:16/10; margin:0 0 .8rem; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--card)}
+.gamma iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.doc{border-left:4px solid var(--lime); padding:.4rem .7rem; background:var(--bg); border-radius:4px; margin-top:.6rem}
+.lista{font-family:var(--serif); font-size:1.08rem; padding-left:1.4rem; margin:.4rem 0}
+.lista li{margin:.3rem 0}
+@media (max-width:480px){ .tbl>div{grid-template-columns:1fr} .tbl span+span{border-left:0} }
+</style>
+
+<style>
+.wrap.wide{max-width:960px}
+.controls{position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+.controls .wrap{display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; padding-block:.6rem}
+.controls .bar{margin:0}
+.nav{display:flex; flex-wrap:wrap; gap:.3rem}
+.nav a{min-width:2rem; text-align:center; padding:.2rem .35rem; border:1px solid var(--line); border-radius:6px; color:var(--fg); text-decoration:none; font-variant-numeric:tabular-nums; font-size:.9rem}
+.nav a:hover,.nav a:focus-visible{background:var(--lime); color:#0A1E35; border-color:var(--lime); outline:none}
+.strofa{display:grid; grid-template-columns:3rem 1fr 1fr; gap:0 1.5rem; padding-block:1.4rem; border-top:1px solid var(--line); scroll-margin-top:7rem}
+.nr{font-family:var(--serif); font-size:1.6rem; line-height:1.2; font-variant-numeric:tabular-nums}
+.col{min-width:0}
+.lang{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.35rem}
+.ro p{font-family:var(--serif); font-size:1.12rem; margin:0; line-height:1.8}
+.hu p{margin:0; color:var(--hu); font-style:italic; line-height:1.8}
+body.fara-hu .hu{display:none}
+body.fara-hu .strofa{grid-template-columns:3rem 1fr}
+.gap{border-top:1px solid var(--line); padding-block:1.2rem .4rem}
+.gap span{font-family:var(--serif); color:var(--muted)}
+.zbor{font-family:var(--serif); font-size:1.4rem; margin:.4rem 0 0}
+.act{max-width:760px}
+.sl{color:var(--fg); font-weight:600; text-decoration:underline; text-decoration-color:var(--fg); text-underline-offset:3px}
+.sl:hover,.sl:focus-visible{background:var(--lime); color:#0A1E35; outline:none}
+@media (max-width:640px){ .strofa{grid-template-columns:1fr; gap:.6rem} body.fara-hu .strofa{grid-template-columns:1fr} .hu{padding-left:.9rem; border-left:3px solid var(--lime)} }
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<header><div class="wrap wide">
+  <p class="brand">HUBROL · Ora mea de română</p>
+  <span class="eyebrow">Text literar</span>
+  <h1>Luceafărul <em lang="hu">/ Az esticsillag</em></h1>
+  <p class="sub">Mihai Eminescu · fragmente · traducere în limba maghiară de Berde Mária</p>
+</div></header>
+<div class="controls"><div class="wrap wide">
+  <nav class="nav" aria-label="Strofe"><a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a><a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a></nav>
+  <div class="bar"><span class="pair"><span>Sprijin:</span><button id="btnHu" class="tog" type="button" aria-pressed="false">Doar în română, cu sinonime</button></span><span class="pair"><span>Cuvinte explicate:</span><button id="btnMk" class="tog" type="button" aria-pressed="true">vizibile</button></span></div>
+</div></div>
+<main><div class="wrap wide">
+  <p class="note">Citește mai întâi strofa în limba română. Când nu înțelegi un cuvânt subliniat, atinge-l: jos apare ce înseamnă azi. Dacă ai nevoie, alege sus „Cu ajutor în maghiară”: apare traducerea.</p>
+  <div id="poem">
+<section class="strofa" id="s1"><div class="nr">1</div>
+ <div class="col ro"><div class="lang">Română</div><p>A fost odată <span class="w" role="button" tabindex="0" data-k="s1_0" aria-pressed="false">ca-n povești</span>,<br>A fost <span class="w" role="button" tabindex="0" data-k="s1_1" aria-pressed="false">ca niciodată</span>.<br><span class="w" role="button" tabindex="0" data-k="s1_2" aria-pressed="false">Din rude mari împărătești</span>,<br>O <span class="w" role="button" tabindex="0" data-k="s1_3" aria-pressed="false">prea frumoasă</span> fată.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Volt egyszer, hol nem volt, mikép<br>Mesélők szája mondja:<br>Császári háznak csodaszép,<br>Tündöklő hajadona.</p></div></section>
+<section class="strofa" id="s2"><div class="nr">2</div>
+ <div class="col ro"><div class="lang">Română</div><p>Și <span class="w" role="button" tabindex="0" data-k="s2_4" aria-pressed="false">era una la părinți</span><br>Și <span class="w" role="button" tabindex="0" data-k="s2_5" aria-pressed="false">mândră-n toate cele</span>,<br>Cum e <span class="w" role="button" tabindex="0" data-k="s2_6" aria-pressed="false">Fecioara</span> între sfinți<br>Și luna între stele.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Szülőinek egy-sarja volt,<br>És mindenek közt drága,<br>Mint szűz a szentnek, s mint a hold<br>A csillagok sorába'.</p></div></section>
+<section class="strofa" id="s3"><div class="nr">3</div>
+ <div class="col ro"><div class="lang">Română</div><p>Din umbra <span class="w" role="button" tabindex="0" data-k="s3_7" aria-pressed="false">falnicelor bolți</span><br><span class="w" role="button" tabindex="0" data-k="s3_8" aria-pressed="false">Ea pasul și-l îndreaptă</span><br>Lângă fereastră, <span class="w" role="button" tabindex="0" data-k="s3_9" aria-pressed="false">unde-n</span> colț<br>Luceafărul așteaptă.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>A büszke bolthajtás alól<br>Kijő az árnyas esttel,<br>S egy ablakmélyedésbe áll, ahol<br>Az Esticsillag leskel.</p></div></section>
+<section class="strofa" id="s4"><div class="nr">4</div>
+ <div class="col ro"><div class="lang">Română</div><p>Privea <span class="w" role="button" tabindex="0" data-k="s4_10" aria-pressed="false">în zare</span> cum pe mări<br><span class="w" role="button" tabindex="0" data-k="s4_11" aria-pressed="false">Răsare</span> și <span class="w" role="button" tabindex="0" data-k="s4_12" aria-pressed="false">străluce</span>,<br>Pe <span class="w" role="button" tabindex="0" data-k="s4_13" aria-pressed="false">mișcătoarele cărări</span><br><span class="w" role="button" tabindex="0" data-k="s4_14" aria-pressed="false">Corăbii</span> negre <span class="w" role="button" tabindex="0" data-k="s4_15" aria-pressed="false">duce</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Elnézi őt: az égperem<br>Fölé kiszáll ragyogva,<br>Hajók elé a tengeren<br>Utat von a habokra.</p></div></section>
+<section class="strofa" id="s5"><div class="nr">5</div>
+ <div class="col ro"><div class="lang">Română</div><p>Îl vede azi, îl vede <span class="w" role="button" tabindex="0" data-k="s5_16" aria-pressed="false">mâini</span>,<br>Astfel <span class="w" role="button" tabindex="0" data-k="s5_17" aria-pressed="false">dorința-i gata</span>;<br>El <span class="w" role="button" tabindex="0" data-k="s5_18" aria-pressed="false">iar</span>, privind de săptămâni,<br><span class="w" role="button" tabindex="0" data-k="s5_19" aria-pressed="false">Îi cade</span> dragă fata.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Elnézi ma, holnap megint,<br>Epedni kezd utána,<br>Egy hét - és sóváran tekint<br>A csillag is a lányra.</p></div></section>
+<section class="strofa" id="s6"><div class="nr">6</div>
+ <div class="col ro"><div class="lang">Română</div><p>Cum ea <span class="w" role="button" tabindex="0" data-k="s6_20" aria-pressed="false">pe coate-și răzima</span><br>Visând <span class="w" role="button" tabindex="0" data-k="s6_21" aria-pressed="false">ale ei tâmple</span>,<br><span class="w" role="button" tabindex="0" data-k="s6_22" aria-pressed="false">De dorul lui</span> și inima<br>Și sufletu-i <span class="w" role="button" tabindex="0" data-k="s6_23" aria-pressed="false">se împle</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Míg álmodoz a hajadon,<br>Fejét tenyerébe ejtvén,<br>Kihajt a vágya szabadon,<br>Úrrá lesz szive-lelkén.</p></div></section>
+<section class="strofa" id="s7"><div class="nr">7</div>
+ <div class="col ro"><div class="lang">Română</div><p>Și cât de viu <span class="w" role="button" tabindex="0" data-k="s7_24" aria-pressed="false">s-aprinde</span> el<br><span class="w" role="button" tabindex="0" data-k="s7_25" aria-pressed="false">În orișicare sară</span>,<br>Spre umbra negrului castel<br>Când ea <span class="w" role="button" tabindex="0" data-k="s7_26" aria-pressed="false">o să-i apară</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>S mily eleven lángban tüzel<br>A csillag estelente<br>A vár felé, ha már közel<br>A lányka megjelente.</p></div></section>
+<div class="gap"><span>(...)</span><h2 class="zbor"><i>Zborul Luceafărului</i></h2></div>
+<section class="strofa" id="s8"><div class="nr">8</div>
+ <div class="col ro"><div class="lang">Română</div><p><span class="w" role="button" tabindex="0" data-k="s8_27" aria-pressed="false">Porni</span> luceafărul. Creșteau<br>În cer <span class="w" role="button" tabindex="0" data-k="s8_28" aria-pressed="false">a lui aripe</span>,<br>Și <span class="w" role="button" tabindex="0" data-k="s8_29" aria-pressed="false">căi</span> de mii de ani treceau<br><span class="w" role="button" tabindex="0" data-k="s8_30" aria-pressed="false">În tot atâtea clipe</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Indult az Estcsillag. Kitárt<br>Két szárnya nőtt, s világolt,<br>Száz pillanatban ő bejárt<br>Százesztendőnyi távolt.</p></div></section>
+<section class="strofa" id="s9"><div class="nr">9</div>
+ <div class="col ro"><div class="lang">Română</div><p>Un cer de stele <span class="w" role="button" tabindex="0" data-k="s9_31" aria-pressed="false">dedesubt</span>,<br><span class="w" role="button" tabindex="0" data-k="s9_32" aria-pressed="false">Deasupra-i</span> cer de stele –<br>Părea un <span class="w" role="button" tabindex="0" data-k="s9_33" aria-pressed="false">fulger ne'ntrerupt</span><br><span class="w" role="button" tabindex="0" data-k="s9_34" aria-pressed="false">Rătăcitor</span> prin ele.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Fölötte csillagboltozat<br>És csillagbolt alatta,<br>Villám, ki meg sosem szakad:<br>Olyan volt elhaladta.</p></div></section>
+<section class="strofa" id="s10"><div class="nr">10</div>
+ <div class="col ro"><div class="lang">Română</div><p>Și <span class="w" role="button" tabindex="0" data-k="s10_35" aria-pressed="false">din a chaosului văi</span>,<br><span class="w" role="button" tabindex="0" data-k="s10_36" aria-pressed="false">Jur împrejur de sine</span>,<br>Vedea, <span class="w" role="button" tabindex="0" data-k="s10_37" aria-pressed="false">ca-n ziua cea dentâi</span>,<br>Cum <span class="w" role="button" tabindex="0" data-k="s10_38" aria-pressed="false">izvorau</span> lumine;</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>És látta: a káosz ölén<br>Körötte lobbot vetnek,<br>S mint a teremtés reggelén:<br>Új fények hogy születnek.</p></div></section>
+<section class="strofa" id="s11"><div class="nr">11</div>
+ <div class="col ro"><div class="lang">Română</div><p>Cum izvorând <span class="w" role="button" tabindex="0" data-k="s11_39" aria-pressed="false">îl înconjor</span><br>Ca niște mări, <span class="w" role="button" tabindex="0" data-k="s11_40" aria-pressed="false">de-a-notul</span>...<br>El zboară, <span class="w" role="button" tabindex="0" data-k="s11_41" aria-pressed="false">gând purtat de dor</span>,<br><span class="w" role="button" tabindex="0" data-k="s11_42" aria-pressed="false">Pân' piere</span> totul, totul;</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Körülfolyták, mint áradat,<br>De ő a szikraszinten<br>Repült tovább bús gond alatt,<br>Míg messze húnyt ki minden.</p></div></section>
+<section class="strofa" id="s12"><div class="nr">12</div>
+ <div class="col ro"><div class="lang">Română</div><p>Căci unde-ajunge <span class="w" role="button" tabindex="0" data-k="s12_43" aria-pressed="false">nu-i hotar</span>,<br>Nici ochi <span class="w" role="button" tabindex="0" data-k="s12_44" aria-pressed="false">spre a cunoaște</span>,<br>Și <span class="w" role="button" tabindex="0" data-k="s12_45" aria-pressed="false">vremea</span>-ncearcă <span class="w" role="button" tabindex="0" data-k="s12_46" aria-pressed="false">în zadar</span><br><span class="w" role="button" tabindex="0" data-k="s12_47" aria-pressed="false">Din goluri</span> a se naște.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>Ott nincs határ, hová elér,<br>És szem se méregetni,<br>S az idő hasztalan remél<br>A Nincsből megszületni.</p></div></section>
+<section class="strofa" id="s13"><div class="nr">13</div>
+ <div class="col ro"><div class="lang">Română</div><p>Nu e nimic și totuși e<br>O sete <span class="w" role="button" tabindex="0" data-k="s13_48" aria-pressed="false">care-l soarbe</span>,<br>E un adânc <span class="w" role="button" tabindex="0" data-k="s13_49" aria-pressed="false">asemene</span><br><span class="w" role="button" tabindex="0" data-k="s13_50" aria-pressed="false">Uitării celei oarbe</span>.</p></div>
+ <div class="col hu" lang="hu"><div class="lang">Magyar</div><p>És ahol minden megszakad,<br>Meg nem szakad a vágya,<br>Mely feneketlen, mint a vak<br>Felejtkezésnek ágya.</p></div></section>
+  </div>
+
+<section class="act" id="s7text" aria-label="Compară cele două texte">
+  <h2 class="sect">Primul pas: cele două texte</h2>
+  <div class="card"><h3>S7. Compară cele două texte.</h3>
+    <p>Citește din nou <a class="sl" href="#s3">strofele 3</a> și <a class="sl" href="#s4">4</a> din <i>Luceafărul</i>, apoi tabelul.</p>
+    <div class="tbl" role="table" aria-label="Citate din cele două texte">
+      <div class="th" role="row"><span role="columnheader">Textul despre Van Gogh</span><span role="columnheader"><i>Luceafărul</i></span></div>
+      <div role="row"><span role="cell">„Pe cer se vedeau Luna, planeta Venus și un grup de stele numit Hiadele.”</span><span role="cell">„Cum e Fecioara între sfinți / Și luna între stele.”</span></div>
+      <div role="row"><span role="cell">„privea pe fereastră și vedea pe cer doar Luceafărul de dimineață, foarte mare.”</span><span role="cell">„Privea în zare cum pe mări / Răsare și străluce,”</span></div>
+      <div role="row"><span role="cell">„Încă din 1888, pictorul își dorea să picteze un cer plin de stele.”</span><span role="cell">„Un cer de stele dedesubt, / Deasupra-i cer de stele –”</span></div>
+      <div role="row"><span role="cell">„Luceafărul de dimineață este, de fapt, planeta Venus.”</span><span role="cell">„Porni luceafărul. Creșteau / În cer a lui aripe,”</span></div>
+    </div>
+    <p><b>Ce au în comun cele două texte? Ce este diferit?</b> Scrie 3–4 propoziții în caietul tău.</p>
+    <p class="model">Textul despre Van Gogh îl găsești aici: <a href="../van-gogh/">Ce fel de cer a pictat Van Gogh?</a></p>
+  </div>
+</section>
+<section class="act" id="proiect" aria-label="Proiectul în perechi">
+  <h2 class="sect">Proiectul în perechi <span>· 3 ore</span></h2>
+  <div class="card">
+    <p><b>Răspundeți în documentul comun din Classroom, la același număr (1a, 1b …).</b> A scrie cu albastru, B scrie cu verde.</p>
+    <p>Pe laptop: deschideți pagina în stânga și documentul în dreapta. Cuvintele subliniate din cerințe duc la strofe.</p>
+    <p>După ce ați scris în document, verificați răspunsurile aici, în casetele „Verificați”.</p>
+  </div>
+
+  <h2 class="comp">Etapa 1 · Receptare <span class="ora">ora 1</span></h2>
+  <div class="card">
+    <p><b>1a.</b> Citește poezia singur(ă), de la <a class="sl" href="#s1">strofa 1</a> la <a class="sl" href="#s13">strofa 13</a>. Citește mai întâi textul românesc.</p>
+    <p><b>1b.</b> Basmul în versuri. Citește <a class="sl" href="#s1">strofa 1</a>. Copiază în tabel versurile care seamănă cu începutul unui basm.</p>
+    <p><b>1c.</b> Citește <a class="sl" href="#s1">strofele 1–7</a>. Cine sunt cele două personaje? Unde stă fata? Unde este Luceafărul? Scrie răspunsurile în tabel.</p>
+    <p><b>1d.</b> Citește <a class="sl" href="#s2">strofa 2</a>. Cu cine este comparată fata? Scrie cele două comparații.</p>
+    <p><b>1e.</b> Rima înseamnă cuvinte care se termină la fel (floare – soare). Citește ultimul cuvânt din fiecare vers al <a class="sl" href="#s1">strofei 1</a>. Care versuri rimează? Scrie perechile: versul … cu versul …</p>
+    <p><b>1f.</b> Citește <a class="sl" href="#s8">strofele 8–13</a>. Ce vede Luceafărul în zborul lui? Scrie 3 lucruri.</p>
+    <p><b>1g.</b> Cuvinte-cheie. Extrageți câte 5 cuvinte-cheie despre cer și despre dorință: A din strofele 1–7, B din strofele 8–13. Pentru fiecare cuvânt, notați într-o propoziție de ce este important.</p>
+  </div>
+  <div class="card task" data-kind="sel"><h3>Verificați 1b</h3><div class="item row" data-ans="1"><p>Versurile care seamănă cu începutul unui basm: primul vers este versul nr.</p><select aria-label="Versurile care seamănă cu începutul unui basm: primul vers este versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="item row" data-ans="2"><p>al doilea vers este versul nr.</p><select aria-label="al doilea vers este versul nr."><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>Verificați 1c</h3><div class="item" data-ans="a"><p>Fata stă …</p><div class="opts col1"><button type="button" data-v="a">lângă fereastră</button><button type="button" data-v="b">în grădină</button><button type="button" data-v="c">pe mare</button></div></div><div class="item" data-ans="a"><p>Luceafărul este …</p><div class="opts col1"><button type="button" data-v="a">pe cer</button><button type="button" data-v="b">în castel</button><button type="button" data-v="c">în odaie</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>Verificați 1d</h3><div class="item" data-ans="a"><p>Fata este comparată cu …</p><div class="opts col1"><button type="button" data-v="a">Fecioara și luna</button><button type="button" data-v="b">soarele și marea</button><button type="button" data-v="c">un înger și o stea</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="sel"><h3>Verificați 1e</h3><div class="item row" data-ans="3"><p>Versul 1 rimează cu versul</p><select aria-label="Versul 1 rimează cu versul"><option value="">–</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="item row" data-ans="4"><p>Versul 2 rimează cu versul</p><select aria-label="Versul 2 rimează cu versul"><option value="">–</option><option value="1">1</option><option value="3">3</option><option value="4">4</option></select></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>Verificați 1f</h3><div class="item" data-ans="a"><p>Ce înseamnă versurile „Și căi de mii de ani treceau / În tot atâtea clipe”?</p><div class="opts col1"><button type="button" data-v="a">Luceafărul zboară foarte repede.</button><button type="button" data-v="b">Luceafărul zboară foarte încet.</button><button type="button" data-v="c">Luceafărul nu zboară.</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card"><h3>Verificați 1g</h3><label class="ck"><input type="checkbox"> Fiecare a scris 5 cuvinte.</label><label class="ck"><input type="checkbox"> Fiecare cuvânt are o propoziție.</label><label class="ck"><input type="checkbox"> Cuvintele sunt din strofele noastre.</label></div>
+
+  <h2 class="comp">Etapa 2 · Interacțiune <span class="ora">ora 2</span></h2>
+  <div class="card">
+    <p><b>2a.</b> Prin interacțiune scrisă, în documentul Google, adresați întrebări despre poezie unui partener de dialog și răspundeți. Fiecare adresează câte 2 întrebări și dă câte 2 răspunsuri, prin colaborare. Model:</p>
+    <p class="model">Întrebări: Ce înseamnă …? · De ce spune poetul …? · Ce legătură are … cu tabloul lui Van Gogh? · Tu ce crezi despre …?<br>Răspunsuri: Eu cred că … · Pentru mine … · Sunt de acord, pentru că … · Nu sunt de acord, pentru că …</p>
+    <p><b>2b.</b> Alegeți împreună strofa care vă place cel mai mult. Scrieți de ce ați ales-o.</p>
+    <p><b>2c.</b> Prezentarea spune: „Van Gogh a pictat cerul cum îl simțea, nu cum îl vedea.” Textul spune că cerul din tablou este un cer real, cel din jurul datei de 22 iulie 1889. Voi ce credeți? A scrie o părere, B răspunde cu altă părere. Fiecare dă un motiv (pentru că …).</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 2</h3><label class="ck"><input type="checkbox"> Fiecare a pus 2 întrebări despre poezie.</label><label class="ck"><input type="checkbox"> Am folosit formulele de mai sus.</label><label class="ck"><input type="checkbox"> Fiecare răspuns are un motiv (pentru că …).</label><label class="ck"><input type="checkbox"> Am ales strofa preferată și am scris de ce.</label><label class="ck"><input type="checkbox"> La 2c, fiecare a scris o părere și un motiv.</label></div>
+
+  <h2 class="comp">Etapa 3 · Mediere <span class="ora">ora 2</span></h2>
+  <div class="card">
+    <p><i>Un coleg a lipsit de la oră și nu a citit poezia. Voi îl ajutați să o înțeleagă.</i></p>
+    <p><b>3a.</b> Alegeți 3 cuvinte din poezie pe care colegul nu le înțelege (de exemplu: <i>zare, corăbii, dedesubt, hotar</i>). Pentru fiecare cuvânt, scrieți un cuvânt mai simplu și o propoziție-exemplu. A explică primul cuvânt, B explică al doilea, iar pe al treilea îl explicați împreună, folosind un AI ca model, după ce sunteți de acord.</p>
+    <p><b>3b.</b> Redați în cuvinte proprii ideea strofei alese la 2b, în 2–3 propoziții. Nu copiați versurile.</p>
+    <p><b>3c.</b> Explicați într-o propoziție, în cuvinte proprii, legătura dintre strofele 1–7 și strofele 8–13.</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 3</h3><label class="ck"><input type="checkbox"> Fiecare cuvânt are un cuvânt mai simplu și o propoziție-exemplu.</label><label class="ck"><input type="checkbox"> Explicațiile sunt formulate în cuvinte proprii.</label><label class="ck"><input type="checkbox"> La 3b nu am copiat versurile.</label><label class="ck"><input type="checkbox"> La 3c am scris o propoziție în cuvinte proprii.</label></div>
+
+  <h2 class="comp">Etapa 4 · Producere <span class="ora">ora 3</span></h2>
+  <div class="card">
+    <p><b>4a. Călătorie printre stele.</b> Imaginați-vă că ați zburat printre stele, ca Luceafărul. Scrieți împreună o carte poștală de 5–6 propoziții pentru un prieten. Spuneți de unde scrieți, ce vedeați în zbor și ce simțeați. Folosiți cel puțin 2 verbe ca în exemplu: <i>vedeam, zburam, priveam</i>. Puteți folosi cuvintele de legătură: <i>pentru că, dar, de aceea, de exemplu, în plus...</i> Încheiați cu o formulă de salut. Puteți crea cartea poștală în Canva, cu o imagine aleasă de voi.</p>
+    <p><b>4b.</b> Priviți împreună cartea poștală și corectați greșelile.</p>
+  </div>
+  <div class="card"><h3>Verificați Etapa 4</h3><label class="ck"><input type="checkbox"> Cartea poștală are 5–6 propoziții.</label><label class="ck"><input type="checkbox"> Am spus de unde scriem, ce vedeam și ce simțeam.</label><label class="ck"><input type="checkbox"> Am folosit cel puțin 2 verbe ca <i>vedeam</i>, <i>zburam</i>.</label><label class="ck"><input type="checkbox"> Am folosit cel puțin 2 cuvinte de legătură.</label><label class="ck"><input type="checkbox"> Am încheiat cu o formulă de salut.</label><label class="ck"><input type="checkbox"> Am scris cu diacritice (ă, â, î, ș, ț).</label></div>
+
+  <div class="card"><h3>Autoevaluare</h3><label class="ck"><input type="checkbox"> Am completat toate sarcinile din document.</label><label class="ck"><input type="checkbox"> Am scris în română, cu diacritice (ă, â, î, ș, ț).</label><label class="ck"><input type="checkbox"> Am verificat acordul, ortografia și punctuația.</label><label class="ck"><input type="checkbox"> Cartea poștală de la 4a are 5–6 propoziții, cuvinte de legătură și o formulă de salut.</label><label class="ck"><input type="checkbox"> Am verificat împreună cartea poștală și am corectat greșelile.</label></div>
+  <p class="predare">Predare (metodă recomandată): gazda apasă „Predă” în Classroom. Colegul scrie în copia lui, pe prima linie: „Lucrez în documentul lui …” și apasă „Predă”.</p>
+</section>
+</div></main>
+<footer><div class="wrap wide">© HUBROL · Ora mea de română · Material didactic<br>Text: Mihai Eminescu (domeniu public) · Traducere: Berde Mária (domeniu public)<br>Surse: <a href="https://www.romanianvoice.com/poezii/poezii/luceafarul.php" target="_blank" rel="noopener">Romanian Voice</a> (textul românesc), <a href="https://www.magyarulbabelben.net/works/ro/Eminescu%2C_Mihai-1850/Luceaf%C4%83rul/hu/58415-Az_esticsillag" target="_blank" rel="noopener">Magyarul Bábelben / MEK</a> (traducerea maghiară)<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
+<aside id="panel" aria-live="polite" hidden><div class="wrap" id="pbody"></div></aside>
+<script>
+const G={"s1_0": {"s": "ca în povești", "d": "poveste"}, "s1_1": {"s": "cum nu a mai fost", "d": "niciodată"}, "s1_2": {"s": "din familie de împărați", "d": "împărătesc"}, "s1_3": {"s": "foarte frumoasă", "d": "prea"}, "s2_4": {"s": "era singura fiică", "d": "unul"}, "s2_5": {"s": "frumoasă în toate", "d": "mândru"}, "s2_6": {"s": "Maica Domnului", "d": "fecioară"}, "s3_7": {"s": "înaltelor arcade", "d": "boltă"}, "s3_8": {"s": "ea merge", "d": "îndrepta"}, "s3_9": {"s": "unde în", "d": "unde"}, "s4_10": {"s": "departe", "d": "zare"}, "s4_11": {"s": "apare pe cer", "d": "răsări"}, "s4_12": {"s": "strălucește", "d": "străluci"}, "s4_13": {"s": "drumurile valurilor", "d": "cărare"}, "s4_14": {"s": "nave", "d": "corabie"}, "s4_15": {"s": "conduce", "d": "duce"}, "s5_16": {"s": "mâine", "d": "mâine"}, "s5_17": {"s": "s-a îndrăgostit", "d": "dorință"}, "s5_18": {"s": "la rândul lui", "d": "iar"}, "s5_19": {"s": "îi place", "d": "cădea"}, "s6_20": {"s": "își sprijinea pe mâini", "d": "rezema"}, "s6_21": {"s": "capul ei", "d": "tâmplă"}, "s6_22": {"s": "de dragostea pentru el", "d": "dor"}, "s6_23": {"s": "se umple", "d": "umple"}, "s7_24": {"s": "strălucește", "d": "aprinde"}, "s7_25": {"s": "în fiecare seară", "d": "orișicare"}, "s7_26": {"s": "va apărea în fața lui", "d": "apărea"}, "s8_27": {"s": "a plecat", "d": "porni"}, "s8_28": {"s": "aripile lui", "d": "aripă"}, "s8_29": {"s": "drumuri", "d": "cale"}, "s8_30": {"s": "în la fel de multe momente", "d": "clipă"}, "s9_31": {"s": "sub el", "d": "dedesubt"}, "s9_32": {"s": "deasupra lui", "d": "deasupra"}, "s9_33": {"s": "lumină de furtună fără oprire", "d": "neîntrerupt"}, "s9_34": {"s": "fără drum", "d": "rătăcitor"}, "s10_35": {"s": "din văile haosului", "d": "haos"}, "s10_36": {"s": "în jurul lui", "d": "împrejur"}, "s10_37": {"s": "ca în prima zi", "d": "dintâi"}, "s10_38": {"s": "apăreau", "d": "izvorî"}, "s11_39": {"s": "îl înconjoară", "d": "înconjura"}, "s11_40": {"s": "înotând", "d": "înot"}, "s11_41": {"s": "gând dus de dorință", "d": "dor"}, "s11_42": {"s": "până dispare", "d": "pieri"}, "s12_43": {"s": "nu e graniță", "d": "hotar"}, "s12_44": {"s": "ca să cunoască", "d": "cunoaște"}, "s12_45": {"s": "timpul", "d": "vreme"}, "s12_46": {"s": "degeaba", "d": "zadar"}, "s12_47": {"s": "din nimic", "d": "gol"}, "s13_48": {"s": "care îl trage", "d": "sorbi"}, "s13_49": {"s": "asemenea", "d": "asemenea"}, "s13_50": {"s": "uitării totale", "d": "uitare"}};
+
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const panel=document.getElementById('panel'), pbody=document.getElementById('pbody');
+let cur=null;
+function closeP(){ if(cur){cur.setAttribute('aria-pressed','false'); cur.focus(); cur=null;} pbody.innerHTML=''; panel.hidden=true; }
+function show(el){
+  const g=G[el.dataset.k]; if(!g)return;
+  if(cur)cur.setAttribute('aria-pressed','false');
+  cur=el; el.setAttribute('aria-pressed','true'); panel.hidden=false;
+  const url='https://dexonline.ro/definitie/'+encodeURIComponent(g.d);
+  pbody.innerHTML='<div class="top"><h2>'+esc(el.textContent)+'</h2><button type="button" class="x" id="close" aria-label="Închide">×</button></div>'
+   +'<p class="sin">'+esc(g.s)+'</p>'
+   +'<div class="dex">Caută în dicționar: <a href="'+url+'" target="_blank" rel="noopener">dexonline.ro</a></div>';
+  document.getElementById('close').onclick=closeP;
+}
+document.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
+document.addEventListener('keydown',e=>{const w=e.target.closest&&e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);} if(e.key==='Escape'&&cur)closeP();});
+const mkb=document.getElementById('btnMk');
+function setMk(on){document.body.classList.toggle('fara-marcaj',!on);mkb.setAttribute('aria-pressed',on);mkb.textContent=on?'vizibile':'ascunse';try{localStorage.setItem('glosar-marcaj',on?'1':'0')}catch(e){}}
+mkb.addEventListener('click',()=>setMk(mkb.getAttribute('aria-pressed')!=='true'));
+let mkv=null;try{mkv=localStorage.getItem('glosar-marcaj')}catch(e){}
+setMk(mkv!=='0');
+
+
+const norm=s=>s.toLowerCase().replace(/ş/g,'ș').replace(/ţ/g,'ț').replace(/[.!?,;:„”"]/g,' ').replace(/\s+/g,' ').trim();
+const words=s=>{const m=s.trim().match(/[^\s]+/g);return m?m.length:0};
+document.querySelectorAll('.opts').forEach(o=>{
+  o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  o.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return;
+    o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    const it=o.closest('.item'); if(it){it.classList.remove('ok','ko'); const f=it.querySelector('.fix'); if(f)f.remove();}});
+});
+document.querySelectorAll('.item select,.item input.line').forEach(s=>s.addEventListener('input',()=>{const it=s.closest('.item'); it.classList.remove('ok','ko'); const f=it.querySelector('.fix'); if(f)f.remove();}));
+document.querySelectorAll('.task').forEach(t=>{
+  const k=t.dataset.kind, chk=t.querySelector('.check');
+  if(chk)chk.addEventListener('click',()=>{
+    const items=[...t.querySelectorAll('.item')]; let ok=0;
+    items.forEach(it=>{
+      let good; const old=it.querySelector('.fix'); if(old)old.remove();
+      if(k==='mc'){const s=it.querySelector('[aria-pressed="true"]'); good=!!s&&s.dataset.v===it.dataset.ans;}
+      else if(k==='sel'){good=it.querySelector('select').value===it.dataset.ans;}
+      else{const v=norm(it.querySelector('input').value); const alts=it.dataset.ans.split('|'); good=alts.some(a=>norm(a)===v);
+        if(!good){const p=document.createElement('p');p.className='fix';p.textContent='Corect: '+alts[0];it.appendChild(p);}}
+      it.classList.toggle('ok',good); it.classList.toggle('ko',!good); if(good)ok++;
+    });
+    t.querySelector('.score').textContent=items.length===1?(ok?'Răspuns corect.':'Răspuns greșit.'):'Ai '+ok+' din '+items.length+' răspunsuri corecte.';
+  });
+  const ta=t.querySelector('textarea');
+  if(ta){const c=t.querySelector('.count'); const upd=()=>{const n=words(ta.value); c.textContent=n+(n===1?' cuvânt':' cuvinte');}; ta.addEventListener('input',upd); upd();}
+});
+async function copyTxt(b,txt,label){
+  try{await navigator.clipboard.writeText(txt); b.textContent='Copiat!';}
+  catch(_){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');b.textContent='Copiat!';}catch(__){b.textContent='Selectează și copiază';}t.remove();}
+  setTimeout(()=>b.textContent=label,2000);
+}
+document.querySelectorAll('.task .copy').forEach(b=>b.addEventListener('click',()=>{const ta=b.closest('.task').querySelector('textarea'); const txt=ta.value.trim(); if(!txt){ta.focus();return;} copyTxt(b,txt,'Copiază textul');}));
+
+
+const hb=document.getElementById('btnHu');
+function setHu(on){document.body.classList.toggle('fara-hu',!on);hb.setAttribute('aria-pressed',on);hb.textContent=on?'Cu ajutor în maghiară':'Doar în română, cu sinonime';try{localStorage.setItem('sprijin-hu',on?'1':'0')}catch(e){}}
+hb.addEventListener('click',()=>setHu(hb.getAttribute('aria-pressed')!=='true'));
+let hv=null;try{hv=localStorage.getItem('sprijin-hu')}catch(e){}
+setHu(hv==='1');
+
+</script>
+</body>
+</html>

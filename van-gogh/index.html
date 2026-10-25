@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ce fel de cer a pictat Van Gogh?</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap">
+<style>
+:root{
+  --navy:#0A1E35; --cream:#f7f2e8; --lime:#B6FF00;
+  --bg:#f7f2e8; --fg:#0A1E35; --muted:#5b6478; --card:#fbf8f2; --line:#ddd5c4;
+  --mark:#0A1E35; --ko:#C62828; --hu:#46516b; --link:#0A1E35;
+  --blue:#cfe0ff; --yellow:#fff2a8;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Source Sans 3', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --mark:#f5f0e8; --ko:#ff8a80; --hu:#c9cfdc; --link:#B6FF00; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081726; --fg:#f5f0e8; --muted:#a7afc2; --card:#0f2a47; --line:#1d3a5a; --mark:#f5f0e8; --ko:#ff8a80; --hu:#c9cfdc; --link:#B6FF00; color-scheme:dark}
+html,body{margin:0}
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:17px; line-height:1.6; overflow-wrap:break-word}
+header{background:var(--navy); color:var(--cream); padding-block:2.2rem 1.6rem}
+.wrap{max-width:760px; margin:0 auto; padding-inline:16px}
+.brand{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--lime); margin:0 0 .3rem}
+.eyebrow{display:inline-block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; background:var(--lime); color:#0A1E35; padding:.1rem .5rem; border-radius:4px; font-weight:600}
+h1{font-family:var(--serif); font-size:clamp(1.9rem,7vw,3rem); margin:.4rem 0 .3rem; line-height:1.12; text-wrap:balance}
+h1 em{font-weight:400}
+.sub{color:#d9d3c6; margin:0}
+main{padding-block:1.5rem 14rem}
+.note{color:var(--muted); font-size:.95rem; margin:0 0 1.2rem}
+.src{border:1px solid var(--line); background:var(--card); border-radius:8px; padding:.7rem 1rem; margin:1.5rem 0; font-size:.95rem}
+a{color:var(--link)}
+.src a,footer a,.dex a{font-weight:600; text-underline-offset:3px}
+.bar{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin:0 0 1rem; font-size:.95rem}
+.pair{display:inline-flex; flex-wrap:wrap; gap:.4rem; align-items:center}
+.tog{font:inherit; padding:.3rem .8rem; border-radius:6px; border:1px solid var(--fg); background:transparent; color:var(--fg); cursor:pointer; font-weight:600}
+.tog[aria-pressed="true"]{background:var(--lime); border-color:var(--lime); color:#0A1E35}
+.tog:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+article p{font-family:var(--serif); font-size:1.15rem; line-height:1.95; margin:0 0 1.2rem}
+.w{border-bottom:1px dotted var(--mark); cursor:pointer; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.w:hover,.w:focus-visible,.w[aria-pressed="true"]{background:var(--lime); color:#0A1E35; outline:none}
+body.fara-marcaj .w{border-bottom-color:transparent}
+#panel[hidden]{display:none}
+#panel{position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--card); border-top:3px solid var(--lime); box-shadow:0 -6px 20px rgba(0,0,0,.18); padding:.9rem 0 calc(.9rem + env(safe-area-inset-bottom,0px)); max-height:55vh; overflow:auto}
+#panel .top{display:flex; align-items:flex-start; gap:.6rem; margin:0 0 .3rem}
+#panel h2{font-family:var(--serif); font-size:1.25rem; margin:0; line-height:1.3}
+#panel .x{margin-left:auto; flex:none; font:inherit; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:6px; padding:.1rem .6rem; cursor:pointer}
+.sin{margin:0 0 .4rem; font-size:1.1rem; font-weight:600}
+.dex{font-size:.95rem}
+footer{color:var(--muted); font-size:.88rem; border-top:1px solid var(--line); padding-block:1.2rem 2rem}
+.act{margin-top:2.5rem}
+.sect{font-family:var(--serif); font-size:1.6rem; margin:0 0 1rem; border-top:3px solid var(--lime); padding-top:1rem}
+.sect span,.ora{font-family:var(--sans); font-size:1rem; font-weight:400; color:var(--muted)}
+.comp{font-family:var(--serif); font-size:1.3rem; margin:1.8rem 0 .6rem}
+.card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem; margin:0 0 1rem}
+.card h3{margin:0 0 .6rem; font-size:1.05rem}
+.card p{margin:.3rem 0}
+.item{padding:.5rem 0; border-top:1px solid var(--line)}
+.item p{margin:0 0 .3rem}
+.item.row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.4rem}
+.item.row p{font-family:var(--serif); font-size:1.1rem; margin:0}
+.opts{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.3rem}
+.item.row .opts{margin:0}
+.opts.col1{flex-direction:column; align-items:stretch}
+.opts.col1 button{text-align:left}
+.opts button,.check,.copy{font:inherit; font-size:.95rem; padding:.35rem .8rem; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer}
+.opts button[aria-pressed="true"]{border-color:var(--fg); box-shadow:inset 0 0 0 1px var(--fg); font-weight:600}
+.opts button.c1[aria-pressed="true"],.tag.c1{background:var(--blue); color:#0A1E35}
+.opts button.c2[aria-pressed="true"],.tag.c2{background:var(--yellow); color:#0A1E35}
+.opts button.c3[aria-pressed="true"],.tag.c3{background:var(--lime); color:#0A1E35}
+.tag{padding:0 .35rem; border-radius:4px}
+.check,.copy{margin-top:.7rem; background:var(--lime); border-color:var(--lime); color:#0A1E35; font-weight:600}
+.item.ok{background:var(--lime); color:#0A1E35; padding-inline:.6rem; border-radius:6px}
+.item.ok .opts button{color:#0A1E35}
+.item.ko{box-shadow:inset 4px 0 0 var(--ko); padding-left:.6rem}
+.item.ko .opts button[aria-pressed="true"],.item.ko select,.item.ko input{border-color:var(--ko); color:var(--ko)}
+.fix{color:var(--ko); font-size:.92rem; margin:.2rem 0 0}
+.item.ok .fix{display:none}
+.score{font-weight:600}
+.line,select{font:inherit; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg)}
+.line{width:100%; box-sizing:border-box; margin-top:.3rem}
+textarea{font:inherit; width:100%; box-sizing:border-box; padding:.5rem; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); margin-top:.5rem}
+.count{color:var(--muted); font-size:.9rem}
+.model{color:var(--muted); font-size:.95rem}
+.quote{font-family:var(--serif); font-size:1.1rem}
+.vers{font-family:var(--serif); font-size:1.08rem; line-height:1.7; border-left:3px solid var(--lime); padding-left:.8rem; margin:.5rem 0 .8rem}
+.tbl{border:1px solid var(--line); border-radius:6px; overflow:hidden; margin:.6rem 0}
+.tbl>div{display:grid; grid-template-columns:1fr 1fr}
+.tbl span{padding:.45rem .6rem; border-top:1px solid var(--line); min-width:0}
+.tbl span+span{border-left:1px solid var(--line); font-family:var(--serif)}
+.tbl .th span{border-top:0; font-weight:600; background:var(--bg)}
+.ck{display:flex; gap:.5rem; align-items:flex-start; padding:.25rem 0}
+.ck input{margin-top:.35rem; accent-color:#0A1E35}
+.predare{color:var(--muted); font-size:.95rem}
+.btn{display:block; text-align:center; margin:1.5rem 0 0; padding:.8rem 1rem; border-radius:8px; background:var(--navy); color:var(--cream); text-decoration:none; font-weight:600; border:1px solid var(--lime)}
+.btn.lime{background:var(--lime); color:#0A1E35; border-color:var(--lime); margin:0 0 1.5rem}
+.btn:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+details.box{border:1px solid var(--line); border-left:4px solid var(--lime); background:var(--card); border-radius:8px; margin:0 0 1rem; padding:.2rem 1rem}
+details.box summary{cursor:pointer; font-weight:600; padding:.5rem 0}
+details.box p{font-family:var(--serif); font-size:1.08rem; line-height:1.85}
+.gamma{position:relative; width:100%; aspect-ratio:16/10; margin:0 0 .8rem; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--card)}
+.gamma iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.doc{border-left:4px solid var(--lime); padding:.4rem .7rem; background:var(--bg); border-radius:4px; margin-top:.6rem}
+.lista{font-family:var(--serif); font-size:1.08rem; padding-left:1.4rem; margin:.4rem 0}
+.lista li{margin:.3rem 0}
+@media (max-width:480px){ .tbl>div{grid-template-columns:1fr} .tbl span+span{border-left:0} }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="brand">HUBROL · Ora mea de română</p>
+  <span class="eyebrow">Text nonliterar</span>
+  <h1>Ce fel de cer a pictat Van Gogh?</h1>
+  <p class="sub">Privește mai întâi prezentarea despre pictor.</p>
+</div></header>
+<main><div class="wrap">
+  <div class="gamma"><iframe src="https://gamma.app/embed/jk4fay67zrx2csu" title="O călătorie prin lumea lui Van Gogh" allow="fullscreen" loading="lazy"></iframe></div>
+  <a class="btn lime" href="https://gamma.app/docs/O-calatorie-prin-lumea-lui-Van-Gogh-jk4fay67zrx2csu" target="_blank" rel="noopener">Deschide prezentarea pe tot ecranul ↗</a>
+  <p class="note"><b>Acum citește textul.</b> Când nu înțelegi un cuvânt subliniat din text, atinge-l: jos apare ce înseamnă.</p>
+  <div class="bar"><span class="pair"><span>Cuvinte explicate:</span><button id="btnMk" class="tog" type="button" aria-pressed="true">vizibile</button></span></div>
+  <article id="text">
+<p>Tabloul <i>Noapte înstelată</i> a fost pictat de Vincent van Gogh în 1889, în sudul Franței. Astăzi, tabloul <span class="w" role="button" tabindex="0" data-k="t0" aria-pressed="false">este păstrat</span> la Muzeul de Artă Modernă din New York și <span class="w" role="button" tabindex="0" data-k="t1" aria-pressed="false">este considerat</span> unul dintre cele mai cunoscute tablouri din lume. Pentru cer, pictorul a folosit mai multe <span class="w" role="button" tabindex="0" data-k="t2" aria-pressed="false">nuanțe</span> de albastru, iar pentru stele și Lună, galben.</p>
+<p>Mult timp, <span class="w" role="button" tabindex="0" data-k="t3" aria-pressed="false">istoricii de artă</span> credeau că pictorul a lucrat la tablou în iunie. Un studiu nou, publicat în revista <i>Scientific Reports</i>, <span class="w" role="button" tabindex="0" data-k="t4" aria-pressed="false">propune</span> altă dată. O echipă <span class="w" role="button" tabindex="0" data-k="t5" aria-pressed="false">condusă de</span> astronomul Elijah Jeong-hyun Kim, din Coreea de Sud, <span class="w" role="button" tabindex="0" data-k="t6" aria-pressed="false">a analizat</span> cerul din tablou. <span class="w" role="button" tabindex="0" data-k="t7" aria-pressed="false">Comparând</span> stelele pictate cu <span class="w" role="button" tabindex="0" data-k="t8" aria-pressed="false">hărțile cerului</span> din acea perioadă, cercetătorii au găsit <span class="w" role="button" tabindex="0" data-k="t9" aria-pressed="false">o potrivire</span>: cerul <span class="w" role="button" tabindex="0" data-k="t10" aria-pressed="false">de dinaintea zorilor</span>, <span class="w" role="button" tabindex="0" data-k="t11" aria-pressed="false">în jurul datei de</span> 22 iulie 1889. Pe cer <span class="w" role="button" tabindex="0" data-k="t12" aria-pressed="false">se vedeau</span> Luna, planeta Venus și un grup de stele numit <i>Hiadele</i>.</p>
+<p>Cercetătorii au citit și scrisorile lui Van Gogh. <span class="w" role="button" tabindex="0" data-k="t13" aria-pressed="false">Încă din</span> 1888, pictorul <span class="w" role="button" tabindex="0" data-k="t14" aria-pressed="false">își dorea</span> să picteze un cer plin de stele. Într-o scrisoare din 1889, el <span class="w" role="button" tabindex="0" data-k="t15" aria-pressed="false">povestea</span> că, într-o dimineață, <span class="w" role="button" tabindex="0" data-k="t16" aria-pressed="false">înainte de răsărit</span>, privea pe fereastră și vedea pe cer doar <span class="w" role="button" tabindex="0" data-k="t17" aria-pressed="false">Luceafărul de dimineață</span>, foarte mare. Luceafărul de dimineață este, <span class="w" role="button" tabindex="0" data-k="t18" aria-pressed="false">de fapt</span>, planeta Venus.</p>
+<p><span class="w" role="button" tabindex="0" data-k="t19" aria-pressed="false">Totuși</span>, Kim spune că sunt <span class="w" role="button" tabindex="0" data-k="t20" aria-pressed="false">necesare</span> noi cercetări, atât în istoria artei, cât și în astronomie. <span class="w" role="button" tabindex="0" data-k="t21" aria-pressed="false">Privind</span> tabloul, oamenii de știință și <span class="w" role="button" tabindex="0" data-k="t22" aria-pressed="false">iubitorii de artă</span> caută <span class="w" role="button" tabindex="0" data-k="t23" aria-pressed="false">în continuare</span> răspunsuri.</p>
+  </article>
+
+  <details class="box"><summary>Știai că…? Hiadele</summary><p>Hiadele sunt un grup de stele din <span class="w" role="button" tabindex="0" data-k="c24" aria-pressed="false">constelația</span> Taurului. Pe cer, ele formează litera V, ca fața unui taur. Grupul se află la aproximativ 150 de <span class="w" role="button" tabindex="0" data-k="c25" aria-pressed="false">ani-lumină</span> de Pământ și se vede fără telescop. Un an-lumină este distanța pe care lumina o parcurge într-un an. Numele vine din <span class="w" role="button" tabindex="0" data-k="c26" aria-pressed="false">mitologia greacă</span>. Hiadele erau surorile unui vânător, Hyas. Când fratele lor a murit, ele au plâns foarte mult și <span class="w" role="button" tabindex="0" data-k="c27" aria-pressed="false">au fost transformate</span> în stele. De aceea, grecii credeau că aceste stele aduc ploaia. Numele lor înseamnă „cele care aduc ploaia”.</p></details>
+  <details class="box"><summary>Știai că…? Luceafărul nu este o stea</summary><p>Venus este a doua planetă de la Soare. Ea nu are lumină <span class="w" role="button" tabindex="0" data-k="c28" aria-pressed="false">proprie</span>: norii ei groși <span class="w" role="button" tabindex="0" data-k="c29" aria-pressed="false">reflectă</span> lumina Soarelui. De aceea, după Lună, Venus este cel mai <span class="w" role="button" tabindex="0" data-k="c30" aria-pressed="false">strălucitor</span> obiect de pe cerul nopții. Venus este mai aproape de Soare decât Pământul, așa că nu o vedem niciodată la miezul nopții. Dimineața, înainte de răsărit, o vedem la est: este Luceafărul de dimineață. Seara, după <span class="w" role="button" tabindex="0" data-k="c31" aria-pressed="false">apus</span>, o vedem la vest: este Luceafărul de seară. Grecii <span class="w" role="button" tabindex="0" data-k="c32" aria-pressed="false">antici</span> credeau că sunt două stele diferite.</p></details>
+
+  <div class="src">Sursa: text adaptat după F. J., <a href="https://www.qmagazine.ro/ce-au-descoperit-cercetatorii-studiind-cerul-din-tabloul-noaptea-instelata-al-lui-van-gogh/" target="_blank" rel="noopener"><i>Ce-au descoperit cercetătorii studiind cerul din tabloul „Noaptea înstelată” al lui Van Gogh</i></a>, Q Magazine, 24.10.2026. Citește articolul întreg la sursă.</div>
+
+<section class="act" id="activitati" aria-label="Activități">
+  <h2 class="sect">Activități <span>· o oră, înainte de <i>Luceafărul</i></span></h2>
+
+  <div class="card" id="warm">
+    <h3>Încălzire</h3>
+    <p>Când privești cerul noaptea, ce faci?</p>
+    <div class="opts free"><button type="button">Caut stelele.</button><button type="button">Fac o fotografie cu telefonul.</button><button type="button">Mă gândesc la ceva important.</button><button type="button">Nu privesc cerul noaptea.</button><button type="button">Altceva.</button></div>
+    <p>Completează propoziția: „Când privesc cerul noaptea, eu …”</p>
+    <input class="line" id="warmLine" type="text" aria-label="Completează propoziția" value="Când privesc cerul noaptea, eu ">
+    <button type="button" class="copy" id="warmCopy">Copiază răspunsul</button>
+    <p class="doc">Lipește răspunsul în documentul Google, la <b>Încălzire</b>.</p>
+  </div>
+
+  <h2 class="comp">1. Receptare</h2>
+  <div class="card task" data-kind="mc"><h3>S1. Adevărat sau fals?</h3><p>Citește enunțurile. Alege A (adevărat) sau F (fals).</p><div class="item" data-ans="A"><p>1. Tabloul <i>Noapte înstelată</i> a fost pictat în 1889.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div><div class="item" data-ans="F"><p>2. Astăzi, tabloul este păstrat într-un muzeu din Paris.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div><div class="item" data-ans="A"><p>3. Mult timp, istoricii de artă credeau că pictorul a lucrat la tablou în iunie.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div><div class="item" data-ans="A"><p>4. Cercetătorii au comparat stelele din tablou cu hărțile cerului.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div><div class="item" data-ans="A"><p>5. În tablou, pe cer, se vede și planeta Venus.</p><div class="opts"><button type="button" data-v="A">Adevărat</button><button type="button" data-v="F">Fals</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>S2. Alege varianta corectă.</h3><div class="item" data-ans="pictat"><p>1. Tabloul <i>Noapte înstelată</i> a fost … de Van Gogh.</p><div class="opts"><button type="button" data-v="pictat">pictat</button><button type="button" data-v="pictată">pictată</button><button type="button" data-v="pictați">pictați</button></div></div><div class="item" data-ans="publicat"><p>2. Studiul a fost … în revista <i>Scientific Reports</i>.</p><div class="opts"><button type="button" data-v="publicat">publicat</button><button type="button" data-v="publicată">publicată</button><button type="button" data-v="publicate">publicate</button></div></div><div class="item" data-ans="păstrat"><p>3. Astăzi, tabloul este … la Muzeul de Artă Modernă din New York.</p><div class="opts"><button type="button" data-v="păstrat">păstrat</button><button type="button" data-v="păstrată">păstrată</button><button type="button" data-v="păstrați">păstrați</button></div></div><div class="item" data-ans="Comparând"><p>4. … stelele cu hărțile cerului, cercetătorii au găsit o potrivire.</p><div class="opts"><button type="button" data-v="Comparând">Comparând</button><button type="button" data-v="Comparat">Comparat</button><button type="button" data-v="Compară">Compară</button></div></div><div class="item" data-ans="privea"><p>5. Într-o dimineață, Van Gogh … pe fereastră înainte de răsărit.</p><div class="opts"><button type="button" data-v="privea">privea</button><button type="button" data-v="privește">privește</button><button type="button" data-v="va privi">va privi</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+  <div class="card task" data-kind="mc"><h3>S3. Găsește verbele.</h3>
+    <p>Sortează cele 11 forme din text în trei coloane:</p>
+    <p><span class="tag c1">diateza pasivă</span> ce se întâmplă cu cineva sau cu ceva<br><span class="tag c2">imperfect</span> ce se întâmpla atunci, timp imperfect<br><span class="tag c3">gerunziu</span> în timp ce…</p>
+    <div class="item row" data-ans="c2"><p>privea</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c1"><p>este păstrat</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c3"><p>comparând</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c2"><p>credeau</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c2"><p>își dorea</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c2"><p>vedea</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c3"><p>privind</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c2"><p>se vedeau</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c1"><p>a fost pictat</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c2"><p>povestea</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><div class="item row" data-ans="c1"><p>este considerat</p><div class="opts"><button type="button" class="c1" data-v="c1">diateza pasivă</button><button type="button" class="c2" data-v="c2">imperfect</button><button type="button" class="c3" data-v="c3">gerunziu</button></div></div><button type="button" class="check">Verifică</button><p class="score" aria-live="polite"></p></div>
+
+  <h2 class="comp">2. Producere</h2>
+  <div class="card"><h3>S4. Transformă enunțurile, ca în model, în caietul tău.</h3>
+    <p class="model">Model: „Van Gogh a pictat tabloul în 1889.” → „Tabloul a fost pictat de Van Gogh în 1889.”</p>
+    <ol class="lista"><li>Muzeul din New York păstrează tabloul. →</li><li>Revista <i>Scientific Reports</i> a publicat studiul. →</li><li>Oamenii admiră tablourile lui Van Gogh. →</li><li>Echipa lui Kim a analizat cerul din tablou. →</li><li>Elevii citesc scrisorile lui Van Gogh. →</li></ol></div>
+
+  <h2 class="comp">3. Interacțiune</h2>
+  <div class="card"><h3>S5. Răspunde colegului.</h3>
+    <p>Mesajul colegului:</p>
+    <p class="quote">„Salut! Azi-dimineață, înainte de școală, priveam cerul de la fereastră. Se vedea o stea foarte mare și strălucitoare. Ce stea era? Tu ce crezi?”</p>
+    <p>Scrie un răspuns scurt. Folosește cel puțin 2 verbe ca <i>privea</i>, <i>se vedea</i> și o formă ca <i>a fost pictat</i>.</p>
+    <p class="model">Model scurt: „Salut! Cred că era planeta Venus, Luceafărul de dimineață. Și Van Gogh o vedea de la fereastră. Ea a fost pictată în tabloul <i>Noapte înstelată</i>.”</p>
+    <p class="doc">Scrie răspunsul în documentul Google, la <b>S5</b>.</p></div>
+
+  <h2 class="comp">4. Mediere</h2>
+  <div class="card"><h3>S6. Explică unui coleg.</h3>
+    <p>Un coleg a lipsit azi de la oră. El nu înțelege această frază din text:</p>
+    <p class="quote">„Comparând stelele pictate cu hărțile cerului din acea perioadă, cercetătorii au găsit o potrivire: cerul de dinaintea zorilor, în jurul datei de 22 iulie 1889.”</p>
+    <p>Explică-i fraza în română, în cuvinte proprii, în 2–3 propoziții simple, vorbite sau prin interacțiune scrisă cu un coleg. Nu copia fraza.</p>
+    <p class="doc">Scrie explicația în documentul Google, la <b>S6</b>.</p></div>
+
+  <div class="card"><h3>Autoevaluare</h3>
+    <label class="ck"><input type="checkbox"> Am privit prezentarea despre pictor și am citit textul până la capăt.</label>
+    <label class="ck"><input type="checkbox"> Am atins cuvintele subliniate când nu le-am înțeles.</label>
+    <label class="ck"><input type="checkbox"> Am scris în română, cu diacritice (ă, â, î, ș, ț).</label>
+    <label class="ck"><input type="checkbox"> La S5 și S6 am scris în cuvinte proprii.</label>
+    <label class="ck"><input type="checkbox"> Am verificat acordul și punctuația.</label>
+  </div>
+  <p class="predare">Încălzirea, S5 și S6 se scriu în documentul Google (metodă recomandată: în Classroom). S4 se scrie în caiet.</p>
+  <a class="btn" href="../luceafarul/">Mai departe: <i>Luceafărul</i> →</a>
+</section>
+</div></main>
+
+<footer><div class="wrap">© HUBROL · Ora mea de română · Material didactic<br>Text: adaptat după F. J., <a href="https://www.qmagazine.ro/ce-au-descoperit-cercetatorii-studiind-cerul-din-tabloul-noaptea-instelata-al-lui-van-gogh/" target="_blank" rel="noopener">qmagazine.ro</a> · Casetele <i>Știai că…?</i>: Ora mea de română<br>Dicționar: <a href="https://dexonline.ro" target="_blank" rel="noopener">dexonline.ro</a></div></footer>
+<aside id="panel" aria-live="polite" hidden><div class="wrap" id="pbody"></div></aside>
+<script>
+const G={"t0": {"s": "se află", "d": "păstra"}, "t1": {"s": "este văzut", "d": "considera"}, "t2": {"s": "feluri", "d": "nuanță"}, "t3": {"s": "specialiștii în artă", "d": "istoric"}, "t4": {"s": "arată", "d": "propune"}, "t5": {"s": "coordonată de", "d": "conduce"}, "t6": {"s": "a studiat", "d": "analiza"}, "t7": {"s": "Verificând", "d": "compara"}, "t8": {"s": "desenele cu locul stelelor pe cer", "d": "hartă"}, "t9": {"s": "o asemănare", "d": "potrivire"}, "t10": {"s": "de dimineață devreme", "d": "zori"}, "t11": {"s": "cam pe", "d": "jur"}, "t12": {"s": "erau", "d": "vedea"}, "t13": {"s": "Deja din", "d": "încă"}, "t14": {"s": "voia", "d": "dori"}, "t15": {"s": "spunea", "d": "povesti"}, "t16": {"s": "înainte să apară soarele", "d": "răsărit"}, "t17": {"s": "steaua de dimineață", "d": "luceafăr"}, "t18": {"s": "în realitate", "d": "fapt"}, "t19": {"s": "Dar", "d": "totuși"}, "t20": {"s": "obligatorii", "d": "necesar"}, "t21": {"s": "Când privesc", "d": "privi"}, "t22": {"s": "oamenii care iubesc arta", "d": "iubitor"}, "t23": {"s": "mai departe", "d": "continuare"}, "c24": {"s": "grupul de stele cu nume", "d": "constelație"}, "c25": {"s": "explicat în casetă", "d": "an-lumină"}, "c26": {"s": "poveștile vechi ale grecilor", "d": "mitologie"}, "c27": {"s": "au fost schimbate", "d": "transforma"}, "c28": {"s": "a ei", "d": "propriu"}, "c29": {"s": "trimit înapoi", "d": "reflecta"}, "c30": {"s": "luminos", "d": "strălucitor"}, "c31": {"s": "momentul când soarele dispare", "d": "apus"}, "c32": {"s": "din vechime", "d": "antic"}};
+
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const panel=document.getElementById('panel'), pbody=document.getElementById('pbody');
+let cur=null;
+function closeP(){ if(cur){cur.setAttribute('aria-pressed','false'); cur.focus(); cur=null;} pbody.innerHTML=''; panel.hidden=true; }
+function show(el){
+  const g=G[el.dataset.k]; if(!g)return;
+  if(cur)cur.setAttribute('aria-pressed','false');
+  cur=el; el.setAttribute('aria-pressed','true'); panel.hidden=false;
+  const url='https://dexonline.ro/definitie/'+encodeURIComponent(g.d);
+  pbody.innerHTML='<div class="top"><h2>'+esc(el.textContent)+'</h2><button type="button" class="x" id="close" aria-label="Închide">×</button></div>'
+   +'<p class="sin">'+esc(g.s)+'</p>'
+   +'<div class="dex">Caută în dicționar: <a href="'+url+'" target="_blank" rel="noopener">dexonline.ro</a></div>';
+  document.getElementById('close').onclick=closeP;
+}
+document.addEventListener('click',e=>{const w=e.target.closest('.w'); if(w)show(w);});
+document.addEventListener('keydown',e=>{const w=e.target.closest&&e.target.closest('.w'); if(w&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(w);} if(e.key==='Escape'&&cur)closeP();});
+const mkb=document.getElementById('btnMk');
+function setMk(on){document.body.classList.toggle('fara-marcaj',!on);mkb.setAttribute('aria-pressed',on);mkb.textContent=on?'vizibile':'ascunse';try{localStorage.setItem('glosar-marcaj',on?'1':'0')}catch(e){}}
+mkb.addEventListener('click',()=>setMk(mkb.getAttribute('aria-pressed')!=='true'));
+let mkv=null;try{mkv=localStorage.getItem('glosar-marcaj')}catch(e){}
+setMk(mkv!=='0');
+
+
+const norm=s=>s.toLowerCase().replace(/ş/g,'ș').replace(/ţ/g,'ț').replace(/[.!?,;:„”"]/g,' ').replace(/\s+/g,' ').trim();
+const words=s=>{const m=s.trim().match(/[^\s]+/g);return m?m.length:0};
+document.querySelectorAll('.opts').forEach(o=>{
+  o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  o.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return;
+    o.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    const it=o.closest('.item'); if(it){it.classList.remove('ok','ko'); const f=it.querySelector('.fix'); if(f)f.remove();}});
+});
+document.querySelectorAll('.item select,.item input.line').forEach(s=>s.addEventListener('input',()=>{const it=s.closest('.item'); it.classList.remove('ok','ko'); const f=it.querySelector('.fix'); if(f)f.remove();}));
+document.querySelectorAll('.task').forEach(t=>{
+  const k=t.dataset.kind, chk=t.querySelector('.check');
+  if(chk)chk.addEventListener('click',()=>{
+    const items=[...t.querySelectorAll('.item')]; let ok=0;
+    items.forEach(it=>{
+      let good; const old=it.querySelector('.fix'); if(old)old.remove();
+      if(k==='mc'){const s=it.querySelector('[aria-pressed="true"]'); good=!!s&&s.dataset.v===it.dataset.ans;}
+      else if(k==='sel'){good=it.querySelector('select').value===it.dataset.ans;}
+      else{const v=norm(it.querySelector('input').value); const alts=it.dataset.ans.split('|'); good=alts.some(a=>norm(a)===v);
+        if(!good){const p=document.createElement('p');p.className='fix';p.textContent='Corect: '+alts[0];it.appendChild(p);}}
+      it.classList.toggle('ok',good); it.classList.toggle('ko',!good); if(good)ok++;
+    });
+    t.querySelector('.score').textContent=items.length===1?(ok?'Răspuns corect.':'Răspuns greșit.'):'Ai '+ok+' din '+items.length+' răspunsuri corecte.';
+  });
+  const ta=t.querySelector('textarea');
+  if(ta){const c=t.querySelector('.count'); const upd=()=>{const n=words(ta.value); c.textContent=n+(n===1?' cuvânt':' cuvinte');}; ta.addEventListener('input',upd); upd();}
+});
+async function copyTxt(b,txt,label){
+  try{await navigator.clipboard.writeText(txt); b.textContent='Copiat!';}
+  catch(_){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');b.textContent='Copiat!';}catch(__){b.textContent='Selectează și copiază';}t.remove();}
+  setTimeout(()=>b.textContent=label,2000);
+}
+document.querySelectorAll('.task .copy').forEach(b=>b.addEventListener('click',()=>{const ta=b.closest('.task').querySelector('textarea'); const txt=ta.value.trim(); if(!txt){ta.focus();return;} copyTxt(b,txt,'Copiază textul');}));
+
+
+(()=>{const w=document.getElementById('warm'), line=document.getElementById('warmLine'), b=document.getElementById('warmCopy');
+ b.addEventListener('click',()=>{const s=w.querySelector('.opts [aria-pressed="true"]'); const v=line.value.trim();
+  const txt=(s?'Când privesc cerul noaptea: '+s.textContent+'\n':'')+v; copyTxt(b,txt,'Copiază răspunsul');});})();
+
+</script>
+</body>
+</html>
