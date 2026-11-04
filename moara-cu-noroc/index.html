@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moara cu noroc – fișă interactivă</title>
+<style>
+:root{--bg:#faf6ec;--card:#fffdf8;--ink:#2a2622;--muted:#6b6258;--acc:#a43a2c;--ok:#2f7d4a;--bad:#b3261e;--line:#e3dac7;--okbg:#e5f3e8;--badbg:#fbe7e4}
+@media(prefers-color-scheme:dark){:root{--bg:#1f1b17;--card:#2a2520;--ink:#f1ebe0;--muted:#b5aa9a;--acc:#e0705f;--ok:#7fcf98;--bad:#ff8f84;--line:#463e35;--okbg:#1f3326;--badbg:#3d2321}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:22px 16px 60px}
+h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.2}
+h1{font-size:2.1rem;margin:.1em 0 .2em}
+h2{font-size:1.35rem;color:var(--acc);margin:0 0 .3em}
+.lead{color:var(--muted);margin:.2em 0 1em}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 6px}
+nav a{color:var(--acc)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0}
+.row{padding:10px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+button{font:inherit;cursor:pointer;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;padding:8px 14px;min-height:42px}
+button.alt{background:transparent;color:var(--acc)}
+button:focus-visible,input:focus-visible,select:focus-visible,.w:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.opts button{background:transparent;color:var(--ink);border-color:var(--line)}
+.opts button.sel{border-color:var(--acc);background:var(--acc);color:#fff}
+.act{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.fb{margin-top:6px;padding:6px 10px;border-radius:8px;font-size:.95rem}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.no{background:var(--badbg);color:var(--bad)}
+.fb:empty{display:none}
+input[type=text],select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);max-width:100%}
+input.ok,select.ok{border-color:var(--ok);background:var(--okbg)}
+input.no,select.no{border-color:var(--bad);background:var(--badbg)}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.bank span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:1px 12px}
+.q{font-family:Georgia,serif;font-size:1.1rem;margin:12px 0 2px}
+.src{color:var(--muted);font-size:.9rem;margin:0 0 10px}
+.w{border-bottom:2px dotted var(--acc);cursor:pointer}
+.hide .w{border-bottom:0;cursor:text}
+.gloss{min-height:3em;margin-top:8px;padding:8px 12px;border-left:4px solid var(--acc);background:var(--bg)}
+.ev{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin:6px 0}
+.ev.ok{border-color:var(--ok);background:var(--okbg)}
+.ev.no{border-color:var(--bad);background:var(--badbg)}
+.ev span{flex:1}
+.ev button{padding:2px 10px;min-height:36px}
+label.o{display:block;padding:4px 0}
+.score{font-size:1.15rem;font-weight:600}
+footer{color:var(--muted);font-size:.9rem;margin-top:24px}
+</style>
+</head>
+<body>
+<main>
+<h1>Moara cu noroc</h1>
+<p class="lead">Ioan Slavici · Fișă interactivă · Nivel A2+–B1</p>
+<p>Lucrează pe rând. La fiecare activitate apasă „Verifică”. Dacă greșești, mai încearcă o dată.</p>
+<nav>
+<a href="#a1">1. Adevărat sau fals</a><a href="#a2">2. Vocabular</a><a href="#a3">3. Ordinea faptelor</a><a href="#a4">4. Potrivește</a><a href="#a5">5. Citatele</a><a href="#a6">6. Mini-test</a>
+</nav>
+
+<section class="sec" id="a1">
+<h2>1. Adevărat, fals sau nu se spune</h2>
+<p>Citește afirmațiile. Alege răspunsul. Pentru „Fals” și „Nu se spune”, scrie în caiet afirmația corectă.</p>
+<div id="tf"></div>
+<div class="act"><button id="tfb">Verifică</button></div>
+</section>
+
+<section class="sec" id="a2">
+<h2>2. Vocabular</h2>
+<p>Completează propozițiile cu cuvintele din listă. Schimbă forma cuvântului dacă este nevoie. Scrie cu diacritice.</p>
+<div class="bank"><span>lăcomie</span><span>complice</span><span>compromis</span><span>demnitate</span><span>gelozie</span><span>ispită</span></div>
+<div id="vb"></div>
+<div class="act"><button id="vbb">Verifică</button></div>
+</section>
+
+<section class="sec" id="a3">
+<h2>3. Pune faptele în ordinea din nuvelă</h2>
+<p>Apasă ↑ și ↓ ca să muți o propoziție. Prima propoziție trebuie să fie începutul poveștii.</p>
+<div id="ev"></div>
+<div class="fb" id="evf"></div>
+<div class="act"><button id="evb">Verifică</button><button class="alt" id="evr">Începe din nou</button></div>
+</section>
+
+<section class="sec" id="a4">
+<h2>4. Potrivește</h2>
+<p>Alege din listă răspunsul potrivit pentru fiecare rând.</p>
+<div id="mt"></div>
+</section>
+
+<section class="sec" id="a5">
+<h2>5. Citește citatele din nuvelă</h2>
+<p>Citește mai întâi citatul. Când nu înțelegi un cuvânt subliniat, atinge-l: jos apare ce înseamnă.</p>
+<div class="act"><button class="alt" id="gt">Cuvinte explicate: vizibile</button></div>
+<div id="qt">
+<p class="q">„Omul să fie <span class="w" tabindex="0" data-g="mulțumit – care are destul și nu cere mai mult">mulțumit</span> cu <span class="w" tabindex="0" data-g="sărăcia – faptul de a avea foarte puțini bani">sărăcia</span> sa, <span class="w" tabindex="0" data-g="căci – pentru că (cuvânt vechi)">căci</span>, dacă e vorba, nu <span class="w" tabindex="0" data-g="bogăția – faptul de a avea mulți bani">bogăția</span>, ci <span class="w" tabindex="0" data-g="liniștea – pace, fără griji și fără zgomot">liniștea</span> <span class="w" tabindex="0" data-g="colibă – casă mică și simplă">colibei</span> tale te face <span class="w" tabindex="0" data-g="fericit – foarte mulțumit și vesel">fericit</span>.”</p>
+<p class="src">Bătrâna, soacra lui Ghiță (Ioan Slavici, Moara cu noroc)</p>
+<p class="q">„Iar Ghiță voia <span class="w" tabindex="0" data-g="cu tot dinadinsul – foarte mult, cu toată puterea">cu tot dinadinsul</span> să rămână la Moara cu noroc, pentru că-i <span class="w" tabindex="0" data-g="a-i merge bine – a avea succes și a câștiga bani">mergea bine</span>.”</p>
+<p class="src">Ioan Slavici, Moara cu noroc</p>
+</div>
+<div class="gloss" id="gl">Atinge un cuvânt subliniat.</div>
+</section>
+
+<section class="sec" id="a6">
+<h2>6. Mini-test</h2>
+<p>Alege un răspuns la fiecare întrebare. La sfârșit vezi scorul.</p>
+<div id="qz"></div>
+<div class="act"><button id="qzb">Vezi scorul</button><button class="alt" id="qzr">Începe din nou</button></div>
+<div class="fb" id="qzf"></div>
+</section>
+
+<footer>©Ora mea de română. Pentru elevi maghiari. Text: Ioan Slavici (domeniu public).</footer>
+</main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const show=(f,c,t)=>{f.className="fb "+c;f.textContent=t};
+const strip=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+
+/* 1. Adevărat / Fals / Nu se spune */
+const TF=[
+["La început, Ghiță este un cizmar sărac, cinstit și muncitor.","A","Ghiță este cizmar sărac, cinstit și muncitor."],
+["Familia ia hanul în arendă pentru că soacra vrea mai mulți bani.","F","Ghiță vrea mai mulți bani. Soacra îl sfătuiește să fie mulțumit cu sărăcia sa."],
+["Ghiță nu se teme de Lică și de aceea îl acceptă ca prieten.","F","Ghiță se teme de Lică, dar îl acceptă pentru că vrea să câștige bani."],
+["Banii îl fac pe Ghiță suspicios și rece față de Ana.","A","Banii îl fac pe Ghiță lacom, rece și suspicios."],
+["Ghiță a învățat meseria de cizmar de la tatăl lui.","NS","Textul nu spune de la cine a învățat Ghiță meseria."],
+["La final, supraviețuiesc doar soacra și cei doi copii.","A","La final supraviețuiesc bătrâna soacră și cei doi copii nevinovați."]];
+const LAB={A:"Adevărat",F:"Fals",NS:"Nu se spune"};
+$("#tf").innerHTML=TF.map((r,i)=>`<div class="row" data-i="${i}" data-n="0"><div>${i+1}. ${r[0]}</div><div class="opts">${["A","F","NS"].map(k=>`<button data-k="${k}">${LAB[k]}</button>`).join("")}</div><div class="fb"></div></div>`).join("");
+$("#tf").onclick=e=>{const b=e.target.closest(".opts button");if(!b)return;const o=b.parentNode;o.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");o.dataset.v=b.dataset.k};
+$("#tfb").onclick=()=>$$("#tf .row").forEach(r=>{
+  const [,a,e]=TF[r.dataset.i],v=r.querySelector(".opts").dataset.v,f=r.querySelector(".fb");
+  if(!v){show(f,"no","Alege un răspuns.");return}
+  if(v===a){show(f,"ok","Corect! "+e+(a!=="A"?" Scrie în caiet afirmația corectă.":""));return}
+  r.dataset.n=+r.dataset.n+1;
+  show(f,"no",+r.dataset.n<2?"Încă nu. Mai citește ghidul și încearcă din nou.":"Răspunsul corect: "+LAB[a]+". "+e);
+});
+
+/* 2. Vocabular */
+const VB=[
+["Începutul","Banii ușori sunt o mare","pentru omul sărac.",["ispită"]],
+["Prima alegere","Pentru bani, Ghiță face","și renunță la ce credea înainte.",["compromisuri"]],
+["Lică la han","Ghiță devine","lui Lică la afacerile necurate.",["complicele"]],
+["Schimbarea","","banilor îl face rece și suspicios.",["lăcomia"]],
+["Pierderea","Ghiță își pierde",", pentru că nu mai este un om cinstit.",["demnitatea"]],
+["Finalul","Orbit de",", Ghiță o ucide pe Ana.",["gelozie"]]];
+$("#vb").innerHTML=VB.map((r,i)=>`<div class="row" data-n="0"><b>${r[0]}</b><br>${r[1]} <input type="text" size="14" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Răspuns ${i+1}">${/^[,.]/.test(r[2])?"":" "}${r[2]}<div class="fb"></div></div>`).join("");
+$("#vbb").onclick=()=>$$("#vb .row").forEach((r,i)=>{
+  const inp=r.querySelector("input"),f=r.querySelector(".fb"),v=inp.value.trim().toLowerCase(),ans=VB[i][3];
+  inp.className="";
+  if(!v){show(f,"no","Scrie un cuvânt.");return}
+  if(ans.includes(v)){inp.className="ok";show(f,"ok","Corect!");return}
+  inp.className="no";
+  if(/[\u015f\u0163]/.test(v)){show(f,"no","Folosește ș și ț cu virgulă, nu cu sedilă.");return}
+  if(ans.some(x=>strip(x)===strip(v))){show(f,"no","Verifică diacriticele (ă, â, î, ș, ț).");return}
+  r.dataset.n=+r.dataset.n+1;
+  show(f,"no",+r.dataset.n<2?"Încă nu. Gândește-te la forma cuvântului.":"Răspunsul corect: "+ans[0]);
+});
+
+/* 3. Ordinea faptelor */
+const EV=["Ghiță ia în arendă hanul „Moara cu noroc”.","Lică Sămădăul vine la han.","Ghiță devine complicele lui Lică.","Ghiță devine tăcut, rece și bănuitor.","Ghiță o ucide pe Ana.","Răuț îl împușcă pe Ghiță.","Hanul arde, iar Lică se sinucide."];
+const ORD0=[3,0,5,2,6,1,4];let ord=ORD0.slice();
+function draw(res){
+  $("#ev").innerHTML=ord.map((k,p)=>`<div class="ev ${res?(k===p?"ok":"no"):""}"><span>${p+1}. ${EV[k]}</span><button class="alt" data-p="${p}" data-d="-1" aria-label="Mută în sus">↑</button><button class="alt" data-p="${p}" data-d="1" aria-label="Mută în jos">↓</button></div>`).join("");
+}
+draw(false);
+$("#ev").onclick=e=>{const b=e.target.closest("button");if(!b)return;const p=+b.dataset.p,q=p+ +b.dataset.d;if(q<0||q>=ord.length)return;[ord[p],ord[q]]=[ord[q],ord[p]];draw(false);$("#evf").className="fb"; $("#evf").textContent=""};
+$("#evb").onclick=()=>{const n=ord.filter((k,p)=>k===p).length;draw(true);show($("#evf"),n===7?"ok":"no",n===7?"Bravo! Ordinea este corectă.":n+" din 7 propoziții sunt la locul lor. Mută cele roșii și încearcă din nou.")};
+$("#evr").onclick=()=>{ord=ORD0.slice();draw(false);$("#evf").className="fb";$("#evf").textContent=""};
+
+/* 4. Potrivește */
+const MT=[
+{t:"4a. Potrivește personajul cu descrierea.",L:["Ghiță","Ana","Lică","Bătrâna"],R:["Se schimbă din cauza lăcomiei și își pierde cinstea.","Tânără, se simte singură și părăsită.","Bogat, autoritar, periculos.","Înțeleaptă, apreciază liniștea căminului."]},
+{t:"4b. Potrivește cauza cu efectul.",L:["Ghiță vrea să câștige mai mulți bani.","Ghiță se teme de Lică, dar vrea bani.","Ghiță devine lacom și suspicios.","Ghiță nu mai vorbește deschis cu Ana."],R:["Ia hanul în arendă.","Acceptă afacerile necurate.","Se îndepărtează de familie.","Ana se simte singură."]},
+{t:"4c. Potrivește cuvântul cu explicația.",L:["han","lăcomie","complice","ispită","demnitate"],R:["Casă la drum unde călătorii mănâncă și dorm.","Dorința de a avea tot mai mulți bani.","Persoană care ajută pe altcineva să facă o faptă rea.","Dorință puternică de a face un lucru care nu este bun.","Respectul de sine; faptul că rămâi cinstit."]}];
+$("#mt").innerHTML=MT.map((m,s)=>{
+  const sh=m.R.map((_,i)=>m.R[(i+2)%m.R.length]);
+  return `<div data-s="${s}"><p><b>${m.t}</b></p>`+m.L.map((l,i)=>`<div class="row"><div>${l}</div><select aria-label="${l}"><option value="">— alege —</option>${sh.map(o=>`<option value="${o}">${o}</option>`).join("")}</select></div>`).join("")+`<div class="act"><button data-chk="${s}">Verifică</button></div><div class="fb"></div></div>`;
+}).join("");
+$("#mt").onclick=e=>{const b=e.target.closest("[data-chk]");if(!b)return;
+  const s=+b.dataset.chk,box=b.closest("[data-s]"),m=MT[s];let n=0,gol=0;
+  box.querySelectorAll("select").forEach((sel,i)=>{sel.className="";if(!sel.value){gol++;return}
+    if(sel.value===m.R[i]){sel.className="ok";n++}else sel.className="no"});
+  const f=box.querySelector(".fb");
+  if(gol)show(f,"no","Alege un răspuns la fiecare rând.");
+  else show(f,n===m.L.length?"ok":"no",n===m.L.length?"Bravo! Toate sunt corecte.":n+" din "+m.L.length+" corecte. Schimbă răspunsurile roșii.");
+};
+
+/* 5. Citate */
+const gl=$("#gl"),qt=$("#qt");
+const sayG=e=>{const w=e.target.closest(".w");if(w&&!qt.classList.contains("hide"))gl.textContent=w.dataset.g};
+qt.onclick=sayG;qt.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();sayG(e)}};
+$("#gt").onclick=function(){const h=qt.classList.toggle("hide");this.textContent="Cuvinte explicate: "+(h?"ascunse":"vizibile");gl.textContent=h?"Cuvintele explicate sunt ascunse.":"Atinge un cuvânt subliniat."};
+
+/* 6. Mini-test */
+const QZ=[
+["De ce ia Ghiță hanul în arendă?",["Vrea să fie departe de familie.","Vrea să câștige mai mulți bani.","Soacra îi cere să facă asta."],1],
+["Ce îl sfătuiește bătrâna pe Ghiță?",["Să câștige cât mai mulți bani.","Să fie mulțumit cu ce are.","Să plece din sat."],1],
+["Cine este Lică Sămădăul?",["Un jandarm care urmărește hoții.","Un cizmar sărac și cinstit.","Un porcar bogat și periculos."],2],
+["Ce arată ironia din titlu?",["„Norocul” din titlu aduce bogăție și fericire.","„Norocul” din titlu aduce nenoroc.","„Norocul” din titlu aduce liniște."],1],
+["Cine îl împușcă pe Ghiță?",["Pintea","Răuț","Lică"],1],
+["Care este lecția nuvelei?",["Banii aduc întotdeauna fericirea.","Liniștea familiei valorează mai mult decât banii.","Omul trebuie să plece din sat."],1]];
+function drawQ(){$("#qz").innerHTML=QZ.map((q,i)=>`<div class="row"><div>${i+1}. ${q[0]}</div>${q[1].map((o,j)=>`<label class="o"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}</div>`).join("");$("#qzf").className="fb";$("#qzf").textContent=""}
+drawQ();
+$("#qzb").onclick=()=>{
+  const r=QZ.map((q,i)=>{const c=document.querySelector(`input[name=q${i}]:checked`);return c?+c.value:-1});
+  if(r.includes(-1)){show($("#qzf"),"no","Răspunde la toate întrebările.");return}
+  const n=r.filter((v,i)=>v===QZ[i][2]).length,gresite=QZ.map((q,i)=>r[i]!==q[2]?`Întrebarea ${i+1}: ${q[1][q[2]]}`:"").filter(Boolean);
+  const msg=n===6?"Excelent! Ai înțeles bine nuvela.":n>=4?"Foarte bine! Mai citește întrebările la care ai greșit.":"Mai citește ghidul de lectură și încearcă din nou.";
+  const f=$("#qzf");f.className="fb "+(n>=4?"ok":"no");
+  f.innerHTML=`<span class="score">Scor: ${n} din 6.</span> ${msg}`+(gresite.length?"<br>Răspunsuri corecte la cele greșite:<br>"+gresite.join("<br>"):"");
+};
+$("#qzr").onclick=drawQ;
+</script>
+</body>
+</html>
